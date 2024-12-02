@@ -1,1 +1,1 @@
-# MyTripBuddy
+# TripBuddy
