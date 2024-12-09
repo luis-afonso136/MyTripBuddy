@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
-    <ion-title>Registo</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,11 +9,13 @@
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" name="email" required></ion-input>
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" name="password" required></ion-input>
+      <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
     </ion-item>
 
     <ion-button expand="block" type="submit" class="ion-margin-top">
@@ -21,4 +23,3 @@
     </ion-button>
   </form>
 </ion-content>
-
