@@ -1,20 +1,75 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="ion-text-center">Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Banner principal -->
+  <div class="home-banner">
+    <img src="" alt="Travel Banner" />
+    <div class="banner-text">
+      <h1>Descubra o Mundo</h1>
+      <p>Encontre os melhores destinos para suas próximas aventuras!</p>
+    </div>
+  </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Lista de destinos -->
+  <h2 class="ion-margin-top ion-text-center">Destinos Populares</h2>
+  <ion-grid>
+    <ion-row>
+      <!-- Destino 1 -->
+      <ion-col size="6">
+        <ion-card>
+          <img src="assets/Paris.avif" alt="Destino 1" />
+          <ion-card-header>
+            <ion-card-title>Paris</ion-card-title>
+            <ion-card-subtitle>França</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <!-- Destino 2 -->
+      <ion-col size="6">
+        <ion-card>
+          <img src="assets/destino2.jpg" alt="Destino 2" />
+          <ion-card-header>
+            <ion-card-title>Maldivas</ion-card-title>
+            <ion-card-subtitle>Ásia</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Destino 3 -->
+      <ion-col size="6">
+        <ion-card>
+          <img src="assets/destino3.jpg" alt="Destino 3" />
+          <ion-card-header>
+            <ion-card-title>Nova York</ion-card-title>
+            <ion-card-subtitle>EUA</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <!-- Destino 4 -->
+      <ion-col size="6">
+        <ion-card>
+          <img src="assets/destino4.jpg" alt="Destino 4" />
+          <ion-card-header>
+            <ion-card-title>Rio de Janeiro</ion-card-title>
+            <ion-card-subtitle>Brasil</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Botão Explore -->
+  <div class="ion-text-center ion-margin-top">
+    <ion-button color="primary" routerLink="/explore" expand="block">
+      Explore Mais Destinos
+    </ion-button>
   </div>
 </ion-content>

@@ -1,0 +1,58 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="login-card">
+    <ion-card-header>
+      <ion-card-title class="card-title">Iniciar Sessão</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item class="input-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Introduza o seu e-mail" type="email"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Introduza a sua senha" type="password"></ion-input>
+        <ion-button fill="clear" slot="end">
+          <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <br>
+      <div class="remember-recover">
+        <ion-checkbox></ion-checkbox>
+        <span>Lembrar-me</span>
+        <a href="#">Recuperar senha?</a>
+      </div>
+      <br>
+      <ion-button expand="block" color="primary" class="access-button" (click)="handleLogin()">Acessar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="or">ou</div>
+
+  <ion-button expand="block" color="light" class="social-button">
+    <ion-icon name="logo-apple" slot="start"></ion-icon>
+    Iniciar sessão com Apple
+  </ion-button>
+
+  <ion-button expand="block" color="primary" class="social-button">
+    <ion-icon name="logo-facebook" slot="start"></ion-icon>
+    Iniciar sessão com Facebook
+  </ion-button>
+
+  <ion-button expand="block" color="danger" class="social-button">
+    <ion-icon name="logo-google" slot="start"></ion-icon>
+    Iniciar sessão com Google
+  </ion-button>
+
+  <p class="terms">
+    Ao iniciar sessão, o utilizador concorda com os nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
+  </p>
+
+  <p class="register-link">Ainda não tem conta? <a (click)="registerLink()">Registe-se</a></p>
+</ion-content>
