@@ -5,27 +5,21 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Card de Registro -->
   <ion-card class="register-card">
     <ion-card-header>
       <ion-card-title class="register-title">Registar-se</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Input Nome -->
       <ion-item class="register-input-item">
         <ion-icon name="person-outline" slot="start"></ion-icon>
         <ion-input placeholder="Introduza o seu nome" type="text"></ion-input>
       </ion-item>
       <br>
-
-      <!-- Input Email -->
       <ion-item class="register-input-item">
         <ion-icon name="mail-outline" slot="start"></ion-icon>
         <ion-input placeholder="Introduza o seu e-mail" type="email"></ion-input>
       </ion-item>
       <br>
-
-      <!-- Input Senha -->
       <ion-item class="register-input-item">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
         <ion-input placeholder="Crie a sua senha" type="password"></ion-input>
@@ -34,16 +28,12 @@
         </ion-button>
       </ion-item>
       <br>
-
-      <!-- Botão Criar -->
       <ion-button expand="block" color="primary" class="register-button" (click)="handleRegister()">Criar</ion-button>
     </ion-card-content>
   </ion-card>
 
-  <!-- Seção ou -->
   <div class="register-or">ou</div>
 
-  <!-- Botões Sociais -->
   <ion-button expand="block" color="light" class="register-social-button">
     <ion-icon name="logo-apple" slot="start"></ion-icon>
     Registar-se com Apple
@@ -59,11 +49,9 @@
     Registar-se com Google
   </ion-button>
 
-  <!-- Termos e Política -->
   <p class="register-terms">
     Ao inscrever-se, o utilizador concorda com os nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
   </p>
 
-  <!-- Link para Login -->
   <p class="register-footer-link">Já tem conta? <a (click)="loginLink()">Inicie sessão</a></p>
 </ion-content>

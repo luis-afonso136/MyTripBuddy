@@ -1,4 +1,3 @@
-/* Centralização e estilização geral */
 ion-content {
     display: flex;
     flex-direction: column;
@@ -7,16 +6,12 @@ ion-content {
     padding: 20px;
   }
   
-  /* Card estilizado */
   .login-card {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    background-color: #1c1c1e;
     padding: 15px;
-    color: #fff;
   }
   
-  /* Título do Card */
   .card-title {
     text-align: center;
     font-size: 1.5rem;
@@ -24,7 +19,6 @@ ion-content {
     margin: 10px 0 20px 0;
   }
   
-  /* Inputs alinhados */
   .input-item {
     --padding-start: 10px;
     --padding-end: 10px;
@@ -32,14 +26,12 @@ ion-content {
     border-radius: 8px;
   }
   
-  /* Botão de acesso */
   .access-button {
     margin-top: 10px;
     font-size: 1.1rem;
     font-weight: 500;
   }
-  
-  /* Lembrar-me e recuperar senha */
+
   .remember-recover {
     display: flex;
     justify-content: space-between;
@@ -52,8 +44,7 @@ ion-content {
     color: var(--ion-color-primary);
     text-decoration: none;
   }
-  
-  /* Seção 'ou' com linhas laterais */
+
   .or {
     position: relative;
     text-align: center;
@@ -68,7 +59,7 @@ ion-content {
     top: 50%;
     width: 40%;
     height: 1px;
-    background-color: #333;
+    background-color: #888;
   }
   
   .or::before {
@@ -79,7 +70,6 @@ ion-content {
     right: 0;
   }
   
-  /* Botões sociais */
   .social-button {
     margin-top: 10px;
     border-radius: 8px;
@@ -87,7 +77,6 @@ ion-content {
     font-weight: 500;
   }
   
-  /* Termos e Registre-se */
   .terms,
   .register {
     text-align: center;
