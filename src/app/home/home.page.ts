@@ -7,10 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  trips = [
-    { title: "Paris", image: 'assets/Paris.avif' },
-  ];
-
   constructor() {}
+
+  
 
 }
