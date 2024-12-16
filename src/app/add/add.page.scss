@@ -1,0 +1,43 @@
+.add-icon {
+  margin-right: 7px;
+}
+
+.add-button {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-buttons ion-button {
+    color: #1aa2fd;
+  }
+  
+  .footer-buttons ion-button ion-icon {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  .footer-text {
+    font-size: 0.8rem;
+    color: #7d7d7d;
+    margin-bottom: 5px;
+  }
+  
+  .footer-buttons ion-button[activated] {
+    color: #007bff;
+  }
