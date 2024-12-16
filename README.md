@@ -1,5 +1,5 @@
 # TripBuddy
 
-Instalar:
-  .node modules
-  .npm install lucide-angular lucide
+/nInstalar:
+ /n .node modules
+  /n.npm install lucide-angular lucide
