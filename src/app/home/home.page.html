@@ -24,7 +24,7 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <img src="assets/Paris.avif" alt="Paris" class="image" />
+      <img src="assets/images/Paris.avif" alt="Paris" class="image" />
     </ion-card-content>
   </ion-card>  
 </ion-content>
@@ -40,13 +40,12 @@
       </div>
 
       <div class="footer-item">
-        <ion-button (click)="addPage()">
-          <lucide-icon name="circle-plus" slot="icon-only (click)="openModal()""></lucide-icon>
+        <ion-button (click)="openModal()">
+          <lucide-icon name="circle-plus" slot="icon-only"></lucide-icon>
         </ion-button>
         <div class="footer-text">Adicionar</div>
       </div>
-
-
+      
       <div class="footer-item">
         <ion-button>
           <lucide-icon name="circle-user-round" slot="icon-only" ></lucide-icon>
