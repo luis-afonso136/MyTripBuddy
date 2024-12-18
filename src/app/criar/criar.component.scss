@@ -1,12 +1,15 @@
-.add-icon {
-    margin-right: 7px;
-  }
-  
-  .add-button {
-    margin-top: 10px;
+.adicionar-viagem-button {
+  margin-top: 10px;
     font-size: 1.1rem;
     font-weight: 500;
-    margin-left: 12px;
-    margin-right: 12px;
-  }
-  
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+}
+
+ion-item {
+  margin-bottom: 6px;
+}

@@ -8,16 +8,49 @@
 </ion-header>
 
 <ion-content>
-  <ion-button class="add-button" expand="block" color="primary">
-    <ion-icon class="add-icon" name="add" slot="icon-only"></ion-icon>
-    Adicionar Nova Viagem
-  </ion-button>
-  <ion-card>
-    <img alt="Silhouette of mountains" src="assets\images\la_palma.jpg" />
-    <ion-card-header>
-      <ion-card-title>La Palma</ion-card-title>
-    </ion-card-header>
-  
-  </ion-card>
-  
+
+    <ion-card>
+      <ion-card-content class="card">
+        <form>
+          <ion-item>
+            <ion-label position="floating">Local Da Viagem</ion-label>
+            <ion-input name="localViagem"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Descrição</ion-label>
+            <ion-textarea  name="descricao"></ion-textarea>
+          </ion-item>
+
+          <!-- <ion-item>
+            <ion-label position="floating">Tipo Da Viagem</ion-label>
+            <ion-select>
+              <ion-select-option value="negocios">Negócios</ion-select-option>
+              <ion-select-option value="lazer">Lazer</ion-select-option>
+              <ion-select-option value="aventura">Aventura</ion-select-option>
+              <ion-select-option value="praia">Praia</ion-select-option>
+            </ion-select>
+          </ion-item> -->
+
+          <ion-item>
+            <ion-label position="floating">Estado</ion-label>
+            <ion-textarea  name="estado"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Localização</ion-label>
+            <ion-textarea  name="localização"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Comentários</ion-label>
+            <ion-textarea  name="comentários"></ion-textarea>
+          </ion-item>
+          
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-button expand="block" color="primary" class="adicionar-viagem-button">Adicionar Viagem</ion-button>
+
 </ion-content>
