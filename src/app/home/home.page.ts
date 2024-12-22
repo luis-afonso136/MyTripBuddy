@@ -24,4 +24,9 @@ export class HomePage {
     });
     return await modal.present();
   }
+
+  goProfile() {
+    this.router.navigate(['/profile']); 
+  }
+
 }
