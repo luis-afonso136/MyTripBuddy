@@ -17,30 +17,45 @@
   <ion-card>
     <ion-card-content class="card">
       <form>
+        <!-- Nome -->
         <ion-item>
-          <ion-label position="floating">Nome</ion-label>
-          <ion-input name="nome"></ion-input>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input label="Nome:" name="nome"></ion-input>
         </ion-item>
 
+        <!-- E-mail -->
         <ion-item>
-          <ion-label position="floating">E-mail</ion-label>
-          <ion-textarea name="email"></ion-textarea>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input label="E-mail:" name="email"></ion-input>
         </ion-item>
 
+        <!-- Contacto -->
         <ion-item>
-          <ion-label position="floating">Contacto</ion-label>
-          <ion-textarea name="contacto"></ion-textarea>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          
+          <ion-input type="number" label="Contacto:" name="contacto"></ion-input>
         </ion-item>
 
+        <!-- Palavra-Passe -->
         <ion-item>
-          <ion-label position="floating">Palavra-Passe</ion-label>
-          <ion-input [type]="passwordType"></ion-input>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input label="Palavra-Passe:" [type]="passwordType"></ion-input>
         </ion-item>
 
-        <!-- Campo de Data de Nascimento -->
+        <!-- Gênero -->
         <ion-item>
-          <ion-label position="floating">Data de Nascimento</ion-label>
-          <ion-input
+          <ion-icon name="male-female-outline" slot="start"></ion-icon>
+          <ion-select label="Género:">
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="feminino">Feminino</ion-select-option>
+            <ion-select-option value="outro">Outro</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Data de Nascimento -->
+        <ion-item>
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <ion-input label="Data de Nascimento:"
             (click)="showDatePicker = !showDatePicker"
             readonly
           ></ion-input>
@@ -53,16 +68,12 @@
           presentation="date"
           [preferWheel]="true"
         ></ion-datetime>
-
-        <!-- Campo de Gênero -->
-        <ion-item>
-          <ion-select placeholder="Escolha o Gênero">
-            <ion-select-option value="masculino">Masculino</ion-select-option>
-            <ion-select-option value="feminino">Feminino</ion-select-option>
-            <ion-select-option value="outro">Outro</ion-select-option>
-          </ion-select>
-        </ion-item>
       </form>
+   
     </ion-card-content>
+
+    
   </ion-card>
+  <ion-button expand="block" color="primary">Guardar Alterações</ion-button>
+
 </ion-content>
