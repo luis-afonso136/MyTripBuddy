@@ -19,14 +19,8 @@ export class HomePage {
 
   async openModal() {
     const modal = await this.modalController.create({
-      component: CriarComponent,
-      cssClass: 'custom-modal-css', 
+      component: CriarComponent, 
     });
     return await modal.present();
   }
-
-  goProfile() {
-    this.router.navigate(['/profile']); 
-  }
-
 }

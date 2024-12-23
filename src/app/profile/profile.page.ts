@@ -24,9 +24,4 @@ export class ProfilePage {
      });
      return await modal.present();
    }
-
-   goHome() {
-    this.router.navigate(['/home']); 
-  }
-
 }

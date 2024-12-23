@@ -30,36 +30,4 @@
   }
   
 
-  .footer-buttons {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
-  .footer-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-buttons ion-button {
-    color: #1aa2fd;
-  }
-  
-  .footer-buttons ion-button ion-icon {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
-  
-  .footer-text {
-    font-size: 0.8rem;
-    color: #7d7d7d;
-    margin-bottom: 5px;
-  }
-  
-  .footer-buttons ion-button[activated] {
-    color: #007bff;
-  }
-  
-  
+ 
