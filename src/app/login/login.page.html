@@ -1,5 +1,5 @@
 <ion-header mode="ios">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Login</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,12 +17,15 @@
   
       <ion-item class="input-item">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-        <ion-input placeholder="Introduza a sua senha" type="password"></ion-input>
-        <ion-button fill="clear" slot="end">
-          <ion-icon name="eye-outline"></ion-icon>
+        <ion-input
+          placeholder="Introduza a sua senha"
+          [type]="passwordType"
+        ></ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
+          <ion-icon [name]="passwordType === 'password' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
         </ion-button>
       </ion-item>
- 
+      
       <div class="remember-recover">
         <ion-checkbox></ion-checkbox>
         <span class="lembrar-me">Lembrar-me</span>

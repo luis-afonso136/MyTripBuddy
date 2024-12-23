@@ -1,11 +1,68 @@
 <ion-header mode="ios">
-  <ion-toolbar class="">
+  <ion-toolbar color="primary">
     <ion-title class="ion-text-center">O meu Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-    <!-- conteudo da pagina aqui -->
+  <div class="ion-text-center">
+    <ion-avatar class="avatar-large">
+      <img
+        src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        alt="Avatar do Usuário"
+      />
+    </ion-avatar>
+  </div>
+
+  <ion-card>
+    <ion-card-content class="card">
+      <form>
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input name="nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-textarea name="email"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contacto</ion-label>
+          <ion-textarea name="contacto"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Palavra-Passe</ion-label>
+          <ion-input [type]="passwordType"></ion-input>
+        </ion-item>
+
+        <!-- Campo de Data de Nascimento -->
+        <ion-item>
+          <ion-label position="floating">Data de Nascimento</ion-label>
+          <ion-input
+            (click)="showDatePicker = !showDatePicker"
+            readonly
+          ></ion-input>
+        </ion-item>
+
+        <!-- Ion Datetime -->
+        <ion-datetime
+          *ngIf="showDatePicker"
+          [max]="maxDate"
+          presentation="date"
+          [preferWheel]="true"
+        ></ion-datetime>
+
+        <!-- Campo de Gênero -->
+        <ion-item>
+          <ion-select placeholder="Escolha o Gênero">
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="feminino">Feminino</ion-select-option>
+            <ion-select-option value="outro">Outro</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
-
-

@@ -1,5 +1,5 @@
 <ion-header mode="ios">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Register</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,11 +22,15 @@
       
       <ion-item class="register-input-item">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-        <ion-input placeholder="Crie a sua senha" type="password"></ion-input>
-        <ion-button fill="clear" slot="end">
-          <ion-icon name="eye-outline"></ion-icon>
+        <ion-input
+          placeholder="Crie a sua senha"
+          [type]="passwordType"
+        ></ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
+          <ion-icon [name]="passwordType === 'password' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
         </ion-button>
       </ion-item>
+      
     
       <ion-button expand="block" color="primary" class="register-button" (click)="handleRegister()">Criar</ion-button>
     </ion-card-content>
