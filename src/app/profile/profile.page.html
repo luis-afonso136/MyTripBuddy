@@ -20,13 +20,13 @@
         <!-- Nome -->
         <ion-item>
           <ion-icon name="person-outline" slot="start"></ion-icon>
-          <ion-input label="Nome:" name="nome"></ion-input>
+          <ion-input label="Nome" label-placement="floating" placeholder="Introduza o Nome" name="nome"></ion-input>
         </ion-item>
 
         <!-- E-mail -->
         <ion-item>
           <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-input label="E-mail:" name="email"></ion-input>
+          <ion-input label="E-mail" label-placement="floating" placeholder="Introduza o Email" name="email"></ion-input>
         </ion-item>
 
         <!-- Contacto -->
@@ -34,8 +34,10 @@
           <ion-icon name="call-outline" slot="start"></ion-icon>
 
           <ion-input
+          label-placement="floating"
+          placeholder="Introduza o Contacto"
             type="number"
-            label="Contacto:"
+            label="Contacto"
             name="contacto"
           ></ion-input>
         </ion-item>
@@ -43,7 +45,7 @@
         <!-- Palavra-Passe -->
         <ion-item>
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          <ion-input label="Palavra-Passe:" type="password">
+          <ion-input label="Palavra-Passe" label-placement="floating" type="password" placeholder="Introduza a Palavra-Passe">
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-item>
@@ -51,7 +53,7 @@
         <!-- Gênero -->
         <ion-item>
           <ion-icon name="male-female-outline" slot="start"></ion-icon>
-          <ion-select label="Género:">
+          <ion-select label="Género" >
             <ion-select-option value="masculino">Masculino</ion-select-option>
             <ion-select-option value="feminino">Feminino</ion-select-option>
             <ion-select-option value="outro">Outro</ion-select-option>
