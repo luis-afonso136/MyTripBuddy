@@ -12,27 +12,32 @@
     <ion-card-content>
       <ion-item class="input-item">
         <ion-icon name="mail-outline" slot="start"></ion-icon>
-        <ion-input placeholder="Introduza o seu e-mail" type="email"></ion-input>
+        <ion-input
+          placeholder="Introduza o seu e-mail"
+          type="email"
+        ></ion-input>
       </ion-item>
-  
+
       <ion-item class="input-item">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-        <ion-input
-          placeholder="Introduza a sua senha"
-          [type]="passwordType"
+        <ion-input placeholder="Introduza a sua senha" type="password"
+          ><ion-input-password-toggle slot="end"></ion-input-password-toggle
         ></ion-input>
-        <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
-          <ion-icon [name]="passwordType === 'password' ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
-        </ion-button>
       </ion-item>
-      
+
       <div class="remember-recover">
         <ion-checkbox></ion-checkbox>
         <span class="lembrar-me">Lembrar-me</span>
         <a href="#">Recuperar senha?</a>
       </div>
-     
-      <ion-button expand="block" color="primary" class="access-button" (click)="handleLogin()">Acessar</ion-button>
+
+      <ion-button
+        expand="block"
+        color="primary"
+        class="access-button"
+        (click)="handleLogin()"
+        >Acessar</ion-button
+      >
     </ion-card-content>
   </ion-card>
 
@@ -54,8 +59,11 @@
   </ion-button>
 
   <p class="terms">
-    Ao iniciar sessão, o utilizador concorda com os nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
+    Ao iniciar sessão, o utilizador concorda com os nossos
+    <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.
   </p>
 
-  <p class="register-link">Ainda não tem conta? <a (click)="registerLink()">Registe-se</a></p>
+  <p class="register-link">
+    Ainda não tem conta? <a (click)="registerLink()">Registe-se</a>
+  </p>
 </ion-content>

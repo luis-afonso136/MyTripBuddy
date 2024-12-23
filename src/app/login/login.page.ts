@@ -21,10 +21,4 @@ export class LoginPage implements OnInit {
    registerLink() {
     this.router.navigate(['/register']);
    }
-
-   passwordType: string = 'password'; // Tipo inicial é 'password'
-
-  togglePasswordVisibility() {
-    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
-  }
 }

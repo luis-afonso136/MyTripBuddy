@@ -32,14 +32,20 @@
         <!-- Contacto -->
         <ion-item>
           <ion-icon name="call-outline" slot="start"></ion-icon>
-          
-          <ion-input type="number" label="Contacto:" name="contacto"></ion-input>
+
+          <ion-input
+            type="number"
+            label="Contacto:"
+            name="contacto"
+          ></ion-input>
         </ion-item>
 
         <!-- Palavra-Passe -->
         <ion-item>
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          <ion-input label="Palavra-Passe:" [type]="passwordType"></ion-input>
+          <ion-input label="Palavra-Passe:" type="password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
         </ion-item>
 
         <!-- Gênero -->
@@ -55,7 +61,8 @@
         <!-- Data de Nascimento -->
         <ion-item>
           <ion-icon name="calendar-outline" slot="start"></ion-icon>
-          <ion-input label="Data de Nascimento:"
+          <ion-input
+            label="Data de Nascimento:"
             (click)="showDatePicker = !showDatePicker"
             readonly
           ></ion-input>
@@ -69,11 +76,7 @@
           [preferWheel]="true"
         ></ion-datetime>
       </form>
-   
     </ion-card-content>
-
-    
   </ion-card>
   <ion-button expand="block" color="primary">Guardar Alterações</ion-button>
-
 </ion-content>

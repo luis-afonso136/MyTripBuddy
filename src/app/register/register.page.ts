@@ -22,9 +22,4 @@ export class RegisterPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  passwordType: string = 'password'; // Tipo inicial é 'password'
-
-  togglePasswordVisibility() {
-    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
-  }
 }
