@@ -8,17 +8,16 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { TabsPageModule } from './tabs/tabs.module';  // O TabsPageModule já importa o CriarComponent
+import { TabsPageModule } from './tabs/tabs.module';
 
 @NgModule({
   declarations: [
     AppComponent
-    // Remova o CriarComponent daqui
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    TabsPageModule,  // O TabsPageModule já tem o CriarComponent
+    TabsPageModule,  
     IonicModule.forRoot({mode: "ios"}),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
