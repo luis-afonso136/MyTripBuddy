@@ -8,49 +8,35 @@
 </ion-header>
 
 <ion-content>
+<form (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="floating">Local Da Viagem</ion-label>
+    <ion-input name="localViagem" [(ngModel)]="viagem.localViagem"></ion-input>
+  </ion-item>
 
-    <ion-card>
-      <ion-card-content class="card">
-        <form>
-          <ion-item>
-            <ion-label position="floating">Local Da Viagem</ion-label>
-            <ion-input name="localViagem"></ion-input>
-          </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descrição</ion-label>
+    <ion-textarea name="descricao" [(ngModel)]="viagem.descricao"></ion-textarea>
+  </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Descrição</ion-label>
-            <ion-textarea  name="descricao"></ion-textarea>
-          </ion-item>
+  <ion-item>
+    <ion-label position="floating">Estado</ion-label>
+    <ion-textarea name="estado" [(ngModel)]="viagem.estado"></ion-textarea>
+  </ion-item>
 
-          <!-- <ion-item>
-            <ion-label position="floating">Tipo Da Viagem</ion-label>
-            <ion-select>
-              <ion-select-option value="negocios">Negócios</ion-select-option>
-              <ion-select-option value="lazer">Lazer</ion-select-option>
-              <ion-select-option value="aventura">Aventura</ion-select-option>
-              <ion-select-option value="praia">Praia</ion-select-option>
-            </ion-select>
-          </ion-item> -->
+  <ion-item>
+    <ion-label position="floating">Localização</ion-label>
+    <ion-textarea name="localizacao" [(ngModel)]="viagem.localizacao"></ion-textarea>
+  </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Estado</ion-label>
-            <ion-textarea  name="estado"></ion-textarea>
-          </ion-item>
+  <ion-item>
+    <ion-label position="floating">Comentários</ion-label>
+    <ion-textarea name="comentarios" [(ngModel)]="viagem.comentarios"></ion-textarea>
+  </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Localização</ion-label>
-            <ion-textarea  name="localização"></ion-textarea>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="floating">Comentários</ion-label>
-            <ion-textarea  name="comentários"></ion-textarea>
-          </ion-item>
-          
-        </form>
-      </ion-card-content>
-    </ion-card>
-
-  <ion-button expand="block" color="primary" class="adicionar-viagem-button">Adicionar Viagem</ion-button>
+  <ion-button expand="block" color="primary" class="adicionar-viagem-button" type="submit">
+    Adicionar Viagem
+  </ion-button>
+</form>
 
 </ion-content>

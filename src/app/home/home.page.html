@@ -1,6 +1,9 @@
 <ion-header mode="ios">
   <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openModal()">Adicionar Viagem</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,16 +19,17 @@
 </ion-toolbar>
 
 <ion-content class="ion-padding">
-  <ion-card class="card">
+  <ion-card *ngFor="let viagem of viagens" class="card">
     <ion-card-header>
       <ion-card-title>
-        <strong>Paris</strong>
-        <span class="ver-mais">Ver mais +</span>
+        <strong>{{ viagem.localViagem }}</strong>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <img src="assets/images/Paris.avif" alt="Paris" class="image" />
+      <p>{{ viagem.descricao }}</p>
+      <p><strong>Estado:</strong> {{ viagem.estado }}</p>
+      <p><strong>Localização:</strong> {{ viagem.localizacao }}</p>
+      <p><strong>Comentários:</strong> {{ viagem.comentarios }}</p>
     </ion-card-content>
-  </ion-card>  
+  </ion-card>
 </ion-content>
-
