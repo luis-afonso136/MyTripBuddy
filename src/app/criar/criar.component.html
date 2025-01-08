@@ -1,14 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="dismissModal()">Close</ion-button>
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close-outline" slot="start"></ion-icon> Close
+      </ion-button>
     </ion-buttons>
-    <ion-title>
-      Adicionar Viagem
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="danger" *ngIf="viagem" (click)="deleteViagem(viagem)">DELETE</ion-button>
-    </ion-buttons>
+    <ion-title> Adicionar Viagem </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,9 +13,18 @@
   <form [formGroup]="form">
     <ion-item>
       <ion-label position="floating">Descrição</ion-label>
-      <ion-textarea formControlName="description" placeholder="Descrição"></ion-textarea>
+      <ion-textarea
+        formControlName="description"
+        placeholder="Descrição"
+      ></ion-textarea>
     </ion-item>
-    <ion-note *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched" color="danger">
+    <ion-note
+      *ngIf="
+        form.get('description')?.hasError('required') &&
+        form.get('description')?.touched
+      "
+      color="danger"
+    >
       Campo obrigatório!
     </ion-note>
     <ion-item>
@@ -30,13 +36,16 @@
     </ion-item>
   </form>
 
-
-    <ion-button color="success" (click)="save()" expand="full" shape="round">
-      Adicionar
-    </ion-button>
-    
- 
-
+  <ion-button
+    color="danger"
+    expand="full"
+    shape="round"
+    *ngIf="viagem"
+    (click)="deleteViagem(viagem)"
+  >
+    <ion-icon name="trash-outline" slot="start"></ion-icon> DELETE
+  </ion-button>
+  <ion-button color="primary" (click)="save()" expand="full" shape="round">
+    SAVE
+  </ion-button>
 </ion-content>
-
-
