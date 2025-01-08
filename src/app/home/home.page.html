@@ -1,43 +1,31 @@
 <ion-header mode="ios">
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Home</ion-title>
+    <ion-title>
+      As minhas viagens
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-toolbar>
-  <ion-segment value="future-trips" (ionChange)="segmentoAlterado($event)" class="trip-segment">
-    <ion-segment-button value="future-trips">
+<ion-content>
+  <!-- Segmento de filtro -->
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)" class="styled-segment">
+    <ion-segment-button value="future-trips">     
       <ion-label>Viagens Futuras</ion-label>
     </ion-segment-button>
     <ion-segment-button value="past-trips">
-      <ion-label>Viagens já efetuadas</ion-label>
+      <ion-label>Viagens Já Efetuadas</ion-label>
     </ion-segment-button>
   </ion-segment>
-</ion-toolbar>
+  
 
-<ion-content class="ion-padding">
-  <ion-card *ngFor="let viagem of viagensFiltradas" class="card">
-    <ion-card-header>
-      <ion-card-title>
-        <strong>{{ viagem.description }}</strong>
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ viagem.description }}</p>
-      <p><strong>Estado:</strong> {{ viagem.state }}</p>
-      <p><strong>Localização:</strong> {{ viagem.location }}</p>
-      <p><strong>Comentários:</strong> {{ viagem.comments }}</p>
-      <ion-buttons>
-        <ion-button (click)="editarViagem(viagem)">Editar</ion-button>
-        <ion-button color="danger" (click)="removerViagem(viagem)">Remover</ion-button>
-      </ion-buttons>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-item *ngIf="viagensFiltradas.length === 0">
-    <ion-label>Nenhuma viagem encontrada.</ion-label>
+  <!-- Lista de viagens filtradas -->
+  <ion-item *ngFor="let viagem of filteredViagens" (click)="openModal(viagem)">
+    <ion-label>
+      {{ viagem.description }}
+    </ion-label>
   </ion-item>
 
+  <!-- Botão flutuante para adicionar nova viagem -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="openModal()">
       <ion-icon name="add"></ion-icon>

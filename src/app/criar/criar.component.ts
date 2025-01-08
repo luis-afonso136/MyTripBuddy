@@ -72,7 +72,7 @@ export class CriarComponent {
     try {
       await firstValueFrom(this.http.post<Viagem[]>(`${this.apiUrl}`, newViagem, { headers }));
       loading.dismiss();
-      await this.presentToast('Viagem criada com sucesso!', 'success');
+      await this.presentToast('Viagem criada com sucesso! ✈️', 'success');
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
@@ -92,7 +92,7 @@ export class CriarComponent {
     try {
       await firstValueFrom(this.http.put<Viagem[]>(`${this.apiUrl}/${this.viagem.id}`, updatedViagem, { headers }));
       loading.dismiss();
-      await this.presentToast('Viagem atualizada com sucesso!', 'success');
+      await this.presentToast('Viagem atualizada com sucesso! ✈️', 'success');
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
@@ -110,7 +110,7 @@ export class CriarComponent {
     try {
       await firstValueFrom(this.http.delete(`${this.apiUrl}/${viagem.id}`, { headers }));
       loading.dismiss();
-      await this.presentToast('Viagem apagada com sucesso!', 'success');
+      await this.presentToast('Viagem apagada com sucesso! ✈️', 'success');
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
@@ -120,7 +120,7 @@ export class CriarComponent {
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Carregando...',
+      message: 'Loading...',
       spinner: 'dots',
       showBackdrop: true,
     });

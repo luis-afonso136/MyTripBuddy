@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
-import { CriarComponent } from '../criar/criar.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { ModalController, ToastController, LoadingController } from '@ionic/angular';
+import { CriarComponent } from '../criar/criar.component';
+
+interface Viagem {
+  id: string;
+  description: string;
+  state: 'Viagens Futuras' | 'Viagens Já Efetuadas';
+  createdBy: string;
+  createdAt: Date;
+  updatedBy: string;
+  updatedAt: Date;
+}
 
 @Component({
   selector: 'app-home',
@@ -10,135 +20,91 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  viagens: any[] = [];
-  viagensFiltradas: any[] = [];
-  segmentoAtual: string = 'future-trips'; // Estado inicial do segmento
   apiUrl: string = 'https://mobile-api-one.vercel.app/api';
-  name: string = 'luis.manuel.afonso@ipvc.pt';  // Ajuste com o seu nome
-  password: string = 'T8@oXkZy';  // Ajuste com a sua senha
+  name: string = 'luis.manuel.afonso@ipvc.pt';
+  password: string = 'T8@oXkZy';
+  viagens: Viagem[] = [];
+  selectedSegment: string = 'future-trips';  // Padrão de segmento
 
   constructor(
-    private modalController: ModalController,
+    private modalCtrl: ModalController,
     private http: HttpClient,
-    private alertController: AlertController
+    private toastController: ToastController,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
-    this.buscarViagens();  // Carregar viagens ao iniciar a página
+    this.getViagens();
   }
 
-  // Buscar as viagens da API
-  async buscarViagens() {
+  async getViagens() {
+    const loading = await this.showLoading();
     const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,  // Basic Authentication
+      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
-  
+
     try {
-      const viagens = await firstValueFrom(this.http.get<any[]>(`${this.apiUrl}/travels`, { headers }));
-      console.log('Viagens recebidas da API:', viagens);  // Log para verificar as viagens
-      this.viagens = viagens;
-      this.filtrarViagens();  // Filtra as viagens após buscar da API
-    } catch (error) {
-      console.error('Erro ao buscar viagens:', error);
-      this.exibirErro('Erro ao buscar viagens');
-    }
-  }
-
-  // Método de filtrar viagens
-filtrarViagens() {
-  console.log('Segmento Atual:', this.segmentoAtual);  // Verifique o valor de segmentoAtual
-  console.log('Viagens antes de filtrar:', this.viagens);  // Log das viagens antes de filtrar
-  
-  // Verifique os valores de 'state' nas viagens
-  this.viagens.forEach(viagem => {
-    console.log('State da viagem:', viagem.state);  // Verifica o valor do estado de cada viagem
-  });
-
-  // Aplica o filtro com comparação mais robusta
-this.viagensFiltradas = this.viagens.filter((viagem) =>
-  this.segmentoAtual === 'future-trips'
-    ? viagem.state?.trim().toLowerCase() === 'viagens futuras'
-    : viagem.state?.trim().toLowerCase() === 'viagens já efetuadas'
-);
-
-  console.log('Viagens Filtradas:', this.viagensFiltradas);  // Verifique as viagens filtradas
-}
-
-
-  // Abrir o modal para criar nova viagem
-  async openModal() {
-    const modal = await this.modalController.create({
-      component: CriarComponent,
-    });
-
-    modal.onDidDismiss().then((result) => {
-      if (result.data) {
-        console.log('Dados retornados do modal:', result.data);  // Verifique os dados do modal
-        this.viagens.push(result.data);  // Atualiza a lista local com a nova viagem
-        this.filtrarViagens();  // Refaz a filtragem com a lista atualizada
-        this.criarViagem(result.data);  // Cria a viagem na API
+      this.viagens = await firstValueFrom(
+        this.http.get<Viagem[]>(`${this.apiUrl}/travels`, { headers })
+      );
+      loading.dismiss();
+      if (this.viagens.length === 0) {
+        await this.presentToast('Não tem viagems disponiveis 😥', 'warning');
+      } else {
+        await this.presentToast(
+          `Possui ${this.viagens.length} Viagens ✈️`,
+          'success'
+        );
       }
-    });
-
-    return await modal.present();
-  }
-
-  // Criar viagem - Envia os dados para a API
-  async criarViagem(viagem: any) {
-    const { startAt, endAt, ...dadosViagem } = viagem; // Remover startAt e endAt para a requisição
-
-    const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,  // Basic Authentication
-    });
-
-    try {
-      const response = await firstValueFrom(this.http.post(`${this.apiUrl}/travels`, dadosViagem, { headers }));
-      console.log('Viagem criada com sucesso!', response);
-      this.viagens.push(response); // Adiciona a viagem retornada pela API à lista local
-      this.filtrarViagens();  // Atualiza a lista filtrada após a criação
-    } catch (error) {
-      console.error('Erro ao criar viagem:', error);
-      this.exibirErro('Erro ao criar viagem');
+    } catch (error: any) {
+      loading.dismiss();
+      await this.presentToast(error.message, 'danger');
     }
   }
 
-  // Editar viagem - Lógica para editar
-  async editarViagem(viagem: any) {
-    console.log('Editar viagem:', viagem);
-    // Aqui você pode abrir um modal de edição com os dados da viagem e enviar um PUT para atualizar.
-  }
-
-  // Remover viagem - Lógica para remover viagem da lista e da API
-  async removerViagem(viagem: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,  // Basic Authentication
+  async openModal(viagem: Viagem | null = null) {
+    const modal = await this.modalCtrl.create({
+      component: CriarComponent,
+      componentProps: { viagem },
+      backdropDismiss: false,
     });
+    modal.present();
 
-    try {
-      await firstValueFrom(this.http.delete(`${this.apiUrl}/travels/${viagem.id}`, { headers }));
-      this.viagens = this.viagens.filter((v) => v.id !== viagem.id);  // Remove da lista local
-      this.filtrarViagens();  // Refaz a filtragem
-      console.log('Viagem removida com sucesso!');
-    } catch (error) {
-      console.error('Erro ao remover viagem:', error);
-      this.exibirErro('Erro ao remover viagem');
+    const { data } = await modal.onWillDismiss();
+    if (data?.message === 'update') {
+      await this.getViagens();
     }
   }
 
-  // Alterar segmento (viagens futuras ou já efetuadas)
-  segmentoAlterado(event: any) {
-    console.log('Valor do segmento selecionado:', event.detail.value);  // Verifique o valor do segmento
-    this.segmentoAtual = event.detail.value;
-    this.filtrarViagens();
+  async presentToast(message: string, color: 'success' | 'danger' | 'warning') {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color,
+    });
+    await toast.present();
   }
 
-  // Exibir alertas de erro
-  async exibirErro(mensagem: string) {
-    const alert = await this.alertController.create({
-      header: 'Erro',
-      message: mensagem,
-      buttons: ['OK']
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      spinner: 'dots',
     });
-    await alert.present();
+    await loading.present();
+    return loading;
+  }
+
+  // Getter para viagens filtradas
+  get filteredViagens() {
+    return this.viagens.filter(viagem => 
+      this.selectedSegment === 'future-trips' ? 
+      viagem.state === 'Viagens Futuras' : 
+      viagem.state === 'Viagens Já Efetuadas'
+    );
+  }
+
+  // Método para mudar o segmento
+  segmentChanged(event: any) {
+    this.selectedSegment = event.detail.value; 
   }
 }
