@@ -1,42 +1,39 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Adicionar Viagem</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>
+      Adicionar Viagem
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onClose()">Fechar</ion-button>
+      <ion-button color="danger" *ngIf="viagem" (click)="deleteViagem(viagem)">DELETE</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<form (ngSubmit)="onSubmit()">
-  <ion-item>
-    <ion-label position="floating">Local Da Viagem</ion-label>
-    <ion-input name="localViagem" [(ngModel)]="viagem.localViagem"></ion-input>
-  </ion-item>
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-textarea formControlName="description" placeholder="Descrição"></ion-textarea>
+    </ion-item>
+    <ion-note *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched" color="danger">
+      Campo obrigatório!
+    </ion-note>
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select formControlName="state">
+        <ion-select-option value="FUTURA">Viagem Futura</ion-select-option>
+        <ion-select-option value="EFETUADA">Viagem Efetuada</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
 
-  <ion-item>
-    <ion-label position="floating">Descrição</ion-label>
-    <ion-textarea name="descricao" [(ngModel)]="viagem.descricao"></ion-textarea>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Estado</ion-label>
-    <ion-textarea name="estado" [(ngModel)]="viagem.estado"></ion-textarea>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Localização</ion-label>
-    <ion-textarea name="localizacao" [(ngModel)]="viagem.localizacao"></ion-textarea>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Comentários</ion-label>
-    <ion-textarea name="comentarios" [(ngModel)]="viagem.comentarios"></ion-textarea>
-  </ion-item>
-
-  <ion-button expand="block" color="primary" class="adicionar-viagem-button" type="submit">
-    Adicionar Viagem
-  </ion-button>
-</form>
+   <ion-toolbar>
+      <ion-button color="success" (click)="save()" expand="full">SALVAR</ion-button>
+    </ion-toolbar>
 
 </ion-content>
+
+

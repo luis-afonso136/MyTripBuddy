@@ -1,14 +1,11 @@
 <ion-header mode="ios">
   <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Home</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="openModal()">Adicionar Viagem</ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-toolbar>
-  <ion-segment value="future-trips" class="trip-segment">
+  <ion-segment value="future-trips" (ionChange)="segmentoAlterado($event)" class="trip-segment">
     <ion-segment-button value="future-trips">
       <ion-label>Viagens Futuras</ion-label>
     </ion-segment-button>
@@ -19,17 +16,31 @@
 </ion-toolbar>
 
 <ion-content class="ion-padding">
-  <ion-card *ngFor="let viagem of viagens" class="card">
+  <ion-card *ngFor="let viagem of viagensFiltradas" class="card">
     <ion-card-header>
       <ion-card-title>
-        <strong>{{ viagem.localViagem }}</strong>
+        <strong>{{ viagem.description }}</strong>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>{{ viagem.descricao }}</p>
-      <p><strong>Estado:</strong> {{ viagem.estado }}</p>
-      <p><strong>Localização:</strong> {{ viagem.localizacao }}</p>
-      <p><strong>Comentários:</strong> {{ viagem.comentarios }}</p>
+      <p>{{ viagem.description }}</p>
+      <p><strong>Estado:</strong> {{ viagem.state }}</p>
+      <p><strong>Localização:</strong> {{ viagem.location }}</p>
+      <p><strong>Comentários:</strong> {{ viagem.comments }}</p>
+      <ion-buttons>
+        <ion-button (click)="editarViagem(viagem)">Editar</ion-button>
+        <ion-button color="danger" (click)="removerViagem(viagem)">Remover</ion-button>
+      </ion-buttons>
     </ion-card-content>
   </ion-card>
+
+  <ion-item *ngIf="viagensFiltradas.length === 0">
+    <ion-label>Nenhuma viagem encontrada.</ion-label>
+  </ion-item>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
