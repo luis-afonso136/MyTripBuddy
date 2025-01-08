@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { ModalController, ToastController, LoadingController } from '@ionic/angular';
+import {
+  ModalController,
+  ToastController,
+  LoadingController,
+} from '@ionic/angular';
 import { CriarComponent } from '../criar/criar.component';
 
 interface Viagem {
   id: string;
   description: string;
-  state: 'Viagens Futuras' | 'Viagens Já Efetuadas';
+  state: State;
   createdBy: string;
   createdAt: Date;
   updatedBy: string;
   updatedAt: Date;
+}
+
+enum State {
+  DONE = 'DONE', // Viagens Já Efetuadas
+  TODO = 'TODO', // Viagem já efetuada
 }
 
 @Component({
@@ -24,7 +33,7 @@ export class HomePage implements OnInit {
   name: string = 'luis.manuel.afonso@ipvc.pt';
   password: string = 'T8@oXkZy';
   viagens: Viagem[] = [];
-  selectedSegment: string = 'future-trips';  // Padrão de segmento
+  selectedSegment: string = 'future-trips'; // Padrão de segmento
 
   constructor(
     private modalCtrl: ModalController,
@@ -96,15 +105,16 @@ export class HomePage implements OnInit {
 
   // Getter para viagens filtradas
   get filteredViagens() {
-    return this.viagens.filter(viagem => 
-      this.selectedSegment === 'future-trips' ? 
-      viagem.state === 'Viagens Futuras' : 
-      viagem.state === 'Viagens Já Efetuadas'
+    return this.viagens.filter(
+      (viagem) =>
+        this.selectedSegment === 'future-trips'
+          ? viagem.state === State.TODO // 'TODO' representa Viagens Futuras
+          : viagem.state === State.DONE // 'DONE' representa Viagens Já Efetuadas
     );
   }
 
   // Método para mudar o segmento
   segmentChanged(event: any) {
-    this.selectedSegment = event.detail.value; 
+    this.selectedSegment = event.detail.value;
   }
 }

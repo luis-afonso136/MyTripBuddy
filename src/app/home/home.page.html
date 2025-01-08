@@ -9,21 +9,31 @@
 <ion-content>
   <!-- Segmento de filtro -->
   <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)" class="styled-segment">
-    <ion-segment-button value="future-trips">     
+    <ion-segment-button value="future-trips">
       <ion-label>Viagens Futuras</ion-label>
     </ion-segment-button>
     <ion-segment-button value="past-trips">
       <ion-label>Viagens Já Efetuadas</ion-label>
     </ion-segment-button>
   </ion-segment>
-  
 
   <!-- Lista de viagens filtradas -->
-  <ion-item *ngFor="let viagem of filteredViagens" (click)="openModal(viagem)">
-    <ion-label>
-      {{ viagem.description }}
-    </ion-label>
-  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let viagem of filteredViagens">
+        <ion-card (click)="openModal(viagem)">
+          <ion-card-header>
+            <ion-card-title>{{ viagem.description }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            
+            
+            <p><strong>Estado:</strong> {{ viagem.state }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <!-- Botão flutuante para adicionar nova viagem -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

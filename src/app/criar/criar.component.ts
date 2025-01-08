@@ -7,9 +7,14 @@ import { firstValueFrom } from 'rxjs';
 interface Viagem {
   id: string;
   description: string;
-  state: string;
+  state: State;
   createdBy?: string;
   updatedBy?: string;
+}
+
+enum State {
+  TODO = 'FUTURA',  // Viagem futura
+  DONE = 'EFETUADA',  // Viagem já efetuada
 }
 
 @Component({
@@ -41,9 +46,10 @@ export class CriarComponent {
   }
 
   setUpForm() {
+    // Definindo o estado inicial como TODO (Viagem futura)
     this.form = this.formBuilder.group({
       description: ['', [Validators.required]],
-      state: ['FUTURA', [Validators.required]],
+      state: [State.TODO, [Validators.required]],  // Usando o enum State
     });
   }
 
@@ -110,7 +116,7 @@ export class CriarComponent {
     try {
       await firstValueFrom(this.http.delete(`${this.apiUrl}/${viagem.id}`, { headers }));
       loading.dismiss();
-      await this.presentToast('Viagem apagada com sucesso! ✈️', 'success');
+      await this.presentToast('Viagem apagada com sucesso! ', 'success');
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
