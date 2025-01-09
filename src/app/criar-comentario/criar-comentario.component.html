@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <!-- Condicional para mostrar o select apenas quando não estiver editando -->
   <ion-item *ngIf="!isEditing">
     <ion-label position="stacked">Selecione uma Viagem</ion-label>
@@ -18,13 +18,29 @@
     </ion-select>
   </ion-item>
 
+  <!-- Comentário -->
   <ion-item>
     <ion-label position="stacked">Comentário</ion-label>
-    <ion-textarea [(ngModel)]="comment"></ion-textarea>
+    <ion-textarea [(ngModel)]="comment" placeholder="Digite seu comentário..."></ion-textarea>
   </ion-item>
 
-  <ion-footer>
-    <ion-button expand="block" *ngIf="isEditing" color="danger" (click)="deleteComment()">Deletar Comentário</ion-button>
-    <ion-button expand="block" *ngIf="!isEditing" (click)="submitComment()">Salvar Comentário</ion-button>
+  <!-- Rodapé com botões -->
+  <ion-footer class="ion-padding">
+    <ion-button 
+      expand="block" 
+      *ngIf="isEditing" 
+      color="danger" 
+      (click)="deleteComment()" 
+      class="ion-margin-top">
+      <ion-icon name="trash-outline" slot="start"></ion-icon> Deletar Comentário
+    </ion-button>
+    
+    <ion-button 
+      expand="block" 
+      *ngIf="!isEditing" 
+      (click)="submitComment()" 
+      class="ion-margin-top">
+      <ion-icon name="save-outline" slot="start"></ion-icon> Salvar Comentário
+    </ion-button>
   </ion-footer>
 </ion-content>

@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="dismissModal()">
-        <ion-icon name="close-outline" slot="start"></ion-icon> Close
+        <ion-icon name="close-outline" slot="start"></ion-icon> Fechar
       </ion-button>
     </ion-buttons>
     <ion-title> Viagens </ion-title>
@@ -11,39 +11,31 @@
 
 <ion-content class="ion-padding">
   <form [formGroup]="form">
+    <!-- Nome da Viagem -->
     <ion-item>
       <ion-label position="floating">Nome da Viagem</ion-label>
-      <ion-input
-        formControlName="prop1"
-      ></ion-input>
+      <ion-input formControlName="prop1"></ion-input>
     </ion-item>
     <ion-note
-      *ngIf="
-        form.get('prop1')?.hasError('required') &&
-        form.get('prop1')?.touched
-      "
+      *ngIf="form.get('prop1')?.hasError('required') && form.get('prop1')?.touched"
       color="danger"
     >
       Campo obrigatório!
     </ion-note>
 
+    <!-- Descrição -->
     <ion-item>
       <ion-label position="floating">Descrição</ion-label>
-      <ion-textarea
-        formControlName="description"
-        placeholder="Descrição"
-      ></ion-textarea>
+      <ion-textarea formControlName="description" placeholder="Descrição"></ion-textarea>
     </ion-item>
     <ion-note
-      *ngIf="
-        form.get('description')?.hasError('required') &&
-        form.get('description')?.touched
-      "
+      *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched"
       color="danger"
     >
       Campo obrigatório!
     </ion-note>
 
+    <!-- Estado -->
     <ion-item>
       <ion-label>Estado</ion-label>
       <ion-select formControlName="state" placeholder="Selecione o estado">
@@ -52,6 +44,7 @@
       </ion-select>
     </ion-item>
 
+    <!-- Continente -->
     <ion-item>
       <ion-label>Continente</ion-label>
       <ion-select formControlName="prop2" placeholder="Selecione o continente">
@@ -64,26 +57,31 @@
       </ion-select>
     </ion-item>
     <ion-note
-      *ngIf="
-        form.get('prop2')?.hasError('required') &&
-        form.get('prop2')?.touched
-      "
+      *ngIf="form.get('prop2')?.hasError('required') && form.get('prop2')?.touched"
       color="danger"
     >
       Campo obrigatório!
     </ion-note>
   </form>
 
+  <!-- Botões de ação -->
   <ion-button
     color="danger"
     expand="full"
     shape="round"
     *ngIf="viagem"
     (click)="deleteViagem(viagem)"
+    class="ion-margin-top"
   >
-    <ion-icon name="trash-outline" slot="start"></ion-icon> DELETE
+    <ion-icon name="trash-outline" slot="start"></ion-icon> DELETAR
   </ion-button>
-  <ion-button color="primary" (click)="save()" expand="full" shape="round">
-    SAVE
+  <ion-button
+    color="primary"
+    (click)="save()"
+    expand="full"
+    shape="round"
+    class="ion-margin-top"
+  >
+    <ion-icon name="save-outline" slot="start"></ion-icon> SALVAR
   </ion-button>
 </ion-content>

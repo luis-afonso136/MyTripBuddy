@@ -9,14 +9,14 @@
   flex: 1;
   text-align: center;
   background: var(--ion-color-light);
-  color: var(--ion-color-primary);
+  color: var(--ion-color-light);
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s, background 0.3s;
 }
 
 .filter-card.selected {
-  background: var(--ion-color-primary);
+  background: var(--ion-color-secondary);
   color: var(--ion-color-light);
   transform: scale(1.05);
 }
