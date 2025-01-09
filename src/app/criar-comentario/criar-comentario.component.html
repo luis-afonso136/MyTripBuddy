@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ isEditing ? 'Editar Comentário' : 'Adicionar Comentário' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Condicional para mostrar o select apenas quando não estiver editando -->
+  <ion-item *ngIf="!isEditing">
+    <ion-label position="stacked">Selecione uma Viagem</ion-label>
+    <ion-select [(ngModel)]="selectedViagemId" placeholder="Escolha uma viagem">
+      <ion-select-option *ngFor="let viagem of viagens" [value]="viagem.id">
+        {{ viagem.prop1 }} - {{ viagem.prop2 }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Comentário</ion-label>
+    <ion-textarea [(ngModel)]="comment"></ion-textarea>
+  </ion-item>
+
+  <ion-footer>
+    <ion-button expand="block" *ngIf="isEditing" color="danger" (click)="deleteComment()">Deletar Comentário</ion-button>
+    <ion-button expand="block" *ngIf="!isEditing" (click)="submitComment()">Salvar Comentário</ion-button>
+  </ion-footer>
+</ion-content>

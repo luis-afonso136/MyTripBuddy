@@ -10,12 +10,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CriarComponent } from './criar/criar.component';
+import { CriarComentarioComponent } from './criar-comentario/criar-comentario.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CriarComponent
+    CriarComponent,
+    CriarComentarioComponent
   ],
   imports: [
     BrowserModule,

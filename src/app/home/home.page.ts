@@ -104,22 +104,21 @@ export class HomePage implements OnInit {
     return loading;
   }
 
-  // Atualize o getter filteredViagens para incluir pesquisa e segmentação
+  refreshViagens() {
+    this.getViagens();
+  }
+
   get filteredViagens() {
     return this.viagens.filter(
       (viagem) =>
         (this.selectedSegment === 'future-trips'
-          ? viagem.state === State.TODO // 'TODO' representa Viagens Futuras
-          : viagem.state === State.DONE) && // 'DONE' representa Viagens Já Efetuadas
-        viagem.prop1
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase()) // Verifica se o termo de pesquisa está presente no campo prop1
+          ? viagem.state === State.TODO
+          : viagem.state === State.DONE) &&
+        viagem.prop1.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
-  
 
-  // Método para aplicar filtros ao mudar segmento ou texto de pesquisa
   filterViagens() {
-    // Apenas força a atualização do getter filteredViagens
+    // Chama apenas o getter `filteredViagens` indiretamente
   }
 }

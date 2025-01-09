@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
  
    handleLogin() {
      
-     this.router.navigate(['/home']); 
+     this.router.navigate(['/tabs/home']); 
    }
 
    registerLink() {
