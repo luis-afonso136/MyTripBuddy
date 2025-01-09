@@ -12,6 +12,22 @@
 <ion-content class="ion-padding">
   <form [formGroup]="form">
     <ion-item>
+      <ion-label position="floating">Nome da Viagem</ion-label>
+      <ion-input
+        formControlName="prop1"
+      ></ion-input>
+    </ion-item>
+    <ion-note
+      *ngIf="
+        form.get('prop1')?.hasError('required') &&
+        form.get('prop1')?.touched
+      "
+      color="danger"
+    >
+      Campo obrigatório!
+    </ion-note>
+
+    <ion-item>
       <ion-label position="floating">Descrição</ion-label>
       <ion-textarea
         formControlName="description"
@@ -27,6 +43,7 @@
     >
       Campo obrigatório!
     </ion-note>
+
     <ion-item>
       <ion-label>Estado</ion-label>
       <ion-select formControlName="state">
@@ -34,6 +51,28 @@
         <ion-select-option value="DONE">Viagem Efetuada</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Continente</ion-label>
+      <ion-select formControlName="prop2" placeholder="Selecione o continente">
+        <ion-select-option value="Africa">África</ion-select-option>
+        <ion-select-option value="Asia">Ásia</ion-select-option>
+        <ion-select-option value="Europe">Europa</ion-select-option>
+        <ion-select-option value="North America">América do Norte</ion-select-option>
+        <ion-select-option value="South America">América do Sul</ion-select-option>
+        <ion-select-option value="Oceania">Oceania</ion-select-option>
+        <ion-select-option value="Antarctica">Antártica</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-note
+      *ngIf="
+        form.get('prop2')?.hasError('required') &&
+        form.get('prop2')?.touched
+      "
+      color="danger"
+    >
+      Campo obrigatório!
+    </ion-note>
   </form>
 
   <ion-button

@@ -8,13 +8,15 @@ interface Viagem {
   id: string;
   description: string;
   state: State;
+  prop1: string; // Nome da viagem
+  prop2: string; // Continente
   createdBy?: string;
   updatedBy?: string;
 }
 
 enum State {
-  TODO = 'FUTURA',  // Viagem futura
-  DONE = 'EFETUADA',  // Viagem já efetuada
+  TODO = 'FUTURA', // Viagem futura
+  DONE = 'EFETUADA', // Viagem já efetuada
 }
 
 @Component({
@@ -46,10 +48,11 @@ export class CriarComponent {
   }
 
   setUpForm() {
-    // Definindo o estado inicial como TODO (Viagem futura)
     this.form = this.formBuilder.group({
       description: ['', [Validators.required]],
-      state: [State.TODO, [Validators.required]],  // Usando o enum State
+      state: [State.TODO, [Validators.required]],
+      prop1: ['', [Validators.required]], // Nome da viagem
+      prop2: ['', [Validators.required]], // Continente
     });
   }
 
@@ -63,7 +66,6 @@ export class CriarComponent {
       return;
     }
     await this.presentToast('Formulário inválido!', 'danger');
-    return;
   }
 
   async createViagem(form: FormGroup) {
@@ -73,7 +75,14 @@ export class CriarComponent {
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
 
-    const newViagem = form.value;
+    const { description, state, prop1, prop2 } = form.value;
+    const newViagem = {
+      description,
+      state,
+      prop1,
+      prop2,
+      createdBy: this.name,
+    };
 
     try {
       await firstValueFrom(this.http.post<Viagem[]>(`${this.apiUrl}`, newViagem, { headers }));
@@ -93,7 +102,14 @@ export class CriarComponent {
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
 
-    const updatedViagem = form.value;
+    const { description, state, prop1, prop2 } = form.value;
+    const updatedViagem = {
+      description,
+      state,
+      prop1,
+      prop2,
+      updatedBy: this.name,
+    };
 
     try {
       await firstValueFrom(this.http.put<Viagem[]>(`${this.apiUrl}/${this.viagem.id}`, updatedViagem, { headers }));

@@ -1,14 +1,20 @@
 <ion-header mode="ios">
   <ion-toolbar color="primary">
-    <ion-title>
-      As minhas viagens
-    </ion-title>
+    <ion-title>As minhas viagens</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- Barra de pesquisa -->
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="filterViagens()"
+    placeholder="Pesquisar viagens..."
+    showCancelButton="always"
+  ></ion-searchbar>
+
   <!-- Segmento de filtro -->
-  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)" class="styled-segment">
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="filterViagens()">
     <ion-segment-button value="future-trips">
       <ion-label>Viagens Futuras</ion-label>
     </ion-segment-button>
@@ -23,11 +29,11 @@
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let viagem of filteredViagens">
         <ion-card (click)="openModal(viagem)">
           <ion-card-header>
-            <ion-card-title>{{ viagem.description }}</ion-card-title>
+            <ion-card-title>{{ viagem.prop1 }}</ion-card-title>
+            <ion-card-subtitle>{{ viagem.prop2 }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            
-            
+            <p><strong>Descrição:</strong> {{ viagem.description }}</p>
             <p><strong>Estado:</strong> {{ viagem.state }}</p>
           </ion-card-content>
         </ion-card>

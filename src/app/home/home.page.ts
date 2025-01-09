@@ -10,6 +10,8 @@ import { CriarComponent } from '../criar/criar.component';
 
 interface Viagem {
   id: string;
+  prop1: string; // Nome da viagem
+  prop2: string; // Continente
   description: string;
   state: State;
   createdBy: string;
@@ -20,7 +22,7 @@ interface Viagem {
 
 enum State {
   DONE = 'DONE', // Viagens Já Efetuadas
-  TODO = 'TODO', // Viagem já efetuada
+  TODO = 'TODO', // Viagens Futuras
 }
 
 @Component({
@@ -34,6 +36,7 @@ export class HomePage implements OnInit {
   password: string = 'T8@oXkZy';
   viagens: Viagem[] = [];
   selectedSegment: string = 'future-trips'; // Padrão de segmento
+  searchTerm: string = ''; // Texto do filtro de pesquisa
 
   constructor(
     private modalCtrl: ModalController,
@@ -57,17 +60,15 @@ export class HomePage implements OnInit {
         this.http.get<Viagem[]>(`${this.apiUrl}/travels`, { headers })
       );
       loading.dismiss();
-      if (this.viagens.length === 0) {
-        await this.presentToast('Não tem viagems disponiveis 😥', 'warning');
-      } else {
-        await this.presentToast(
-          `Possui ${this.viagens.length} Viagens ✈️`,
-          'success'
-        );
-      }
+      this.presentToast(
+        this.viagens.length
+          ? `Possui ${this.viagens.length} viagens disponíveis ✈️`
+          : 'Não há viagens disponíveis 😥',
+        this.viagens.length ? 'success' : 'warning'
+      );
     } catch (error: any) {
       loading.dismiss();
-      await this.presentToast(error.message, 'danger');
+      this.presentToast(`Erro ao carregar viagens: ${error.message}`, 'danger');
     }
   }
 
@@ -96,25 +97,29 @@ export class HomePage implements OnInit {
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Loading...',
+      message: 'Carregando...',
       spinner: 'dots',
     });
     await loading.present();
     return loading;
   }
 
-  // Getter para viagens filtradas
+  // Atualize o getter filteredViagens para incluir pesquisa e segmentação
   get filteredViagens() {
     return this.viagens.filter(
       (viagem) =>
-        this.selectedSegment === 'future-trips'
+        (this.selectedSegment === 'future-trips'
           ? viagem.state === State.TODO // 'TODO' representa Viagens Futuras
-          : viagem.state === State.DONE // 'DONE' representa Viagens Já Efetuadas
+          : viagem.state === State.DONE) && // 'DONE' representa Viagens Já Efetuadas
+        viagem.prop1
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase()) // Verifica se o termo de pesquisa está presente no campo prop1
     );
   }
+  
 
-  // Método para mudar o segmento
-  segmentChanged(event: any) {
-    this.selectedSegment = event.detail.value;
+  // Método para aplicar filtros ao mudar segmento ou texto de pesquisa
+  filterViagens() {
+    // Apenas força a atualização do getter filteredViagens
   }
 }
