@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalController, LoadingController, ToastController } from '@ionic/angular';
+import { ModalController, LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
@@ -36,6 +36,7 @@ export class CriarComponent {
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
     private toastController: ToastController,
+    private alertController: AlertController,
     private formBuilder: FormBuilder
   ) {
     this.setUpForm();
@@ -91,7 +92,7 @@ export class CriarComponent {
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
-      await this.presentToast(error.error, 'danger');
+      await this.handleError(error);
     }
   }
 
@@ -118,7 +119,7 @@ export class CriarComponent {
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
-      await this.presentToast(error.error, 'danger');
+      await this.handleError(error);
     }
   }
 
@@ -136,7 +137,15 @@ export class CriarComponent {
       await this.dismissModal('update');
     } catch (error: any) {
       loading.dismiss();
+      await this.handleError(error);
+    }
+  }
+
+  async handleError(error: any) {
+    if (error.error) {
       await this.presentToast(error.error, 'danger');
+    } else {
+      await this.showAlert('Erro', 'Ocorreu um erro inesperado.');
     }
   }
 
@@ -161,6 +170,16 @@ export class CriarComponent {
     });
 
     await toast.present();
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
   async dismissModal(message: any = null) {
