@@ -1,7 +1,6 @@
 <ion-header mode="ios">
   <ion-toolbar color="primary">
     <ion-title>As minhas viagens</ion-title>
-    <!-- Botão de Refresh no lado direito -->
     <ion-buttons slot="end">
       <ion-button (click)="refreshViagens()">
         <ion-icon name="refresh-outline" slot="icon-only"></ion-icon>
@@ -10,14 +9,12 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <!-- Barra de pesquisa -->
   <ion-searchbar
     [(ngModel)]="searchTerm"
     (ionInput)="filterViagens()"
     placeholder="Pesquisar viagens..."
-    
   ></ion-searchbar>
 
   <!-- Segmento de filtro -->
@@ -41,7 +38,9 @@
           </ion-card-header>
           <ion-card-content>
             <p><strong>Descrição:</strong> {{ viagem.description }}</p>
-            <p><strong>Estado:</strong> {{ viagem.state }}</p>
+            <p><strong>Tipo De Viagem:</strong> {{ viagem.type }}</p>
+            <p><strong>Início:</strong> {{ viagem.startAt | date: 'shortDate' }}</p>
+            <p><strong>Fim:</strong> {{ viagem.endAt | date: 'shortDate' }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

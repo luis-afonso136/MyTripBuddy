@@ -1,0 +1,50 @@
+<ion-header mode="ios">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      {{ action === 'update' ? 'Editar Localização' : 'Adicionar Localização' }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" fill="clear">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="submitForm()">
+    <!-- Nome da Localização -->
+    <ion-item lines="full">
+      <ion-label position="floating">Nome da Localização</ion-label>
+      <ion-input [(ngModel)]="location.prop1" name="prop1" required></ion-input>
+    </ion-item>
+
+    <!-- Descrição -->
+    <ion-item lines="full">
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-input [(ngModel)]="location.description" name="description" required></ion-input>
+    </ion-item>
+
+    <!-- Seleção de Viagem -->
+    <ion-item lines="full">
+      <ion-label>Selecione a Viagem</ion-label>
+      <ion-select [(ngModel)]="location.travelId" name="travelId" required>
+        <ion-select-option *ngFor="let viagem of viagens" [value]="viagem.id">
+          {{ viagem.prop1 }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Botões -->
+    <div class="ion-margin-top">
+      <ion-button expand="full" type="submit" [disabled]="!location.travelId" shape="round" color="primary">
+        {{ action === 'update' ? 'Atualizar Localização' : 'Salvar Localização' }}
+      </ion-button>
+
+      <!-- Botão de exclusão -->
+      <ion-button expand="full" color="danger" *ngIf="action === 'update'" (click)="deleteLocation()" shape="round" class="ion-margin-top">
+        Deletar Localização
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

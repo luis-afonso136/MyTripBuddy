@@ -1,34 +1,4 @@
-.filter-cards {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin: 16px 0;
-}
 
-.filter-card {
-  flex: 1;
-  text-align: center;
-  background: var(--ion-color-light);
-  color: var(--ion-color-light);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, background 0.3s;
-}
-
-.filter-card.selected {
-  background: var(--ion-color-secondary);
-  color: var(--ion-color-light);
-  transform: scale(1.05);
-}
-
-.filter-card ion-card-title {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.filter-card p {
-  font-size: 14px;
-}
 
 .viagem-item {
   margin: 12px 0;
@@ -39,7 +9,6 @@
 
 .comments-section {
   padding: 16px;
-  background: var(--ion-color-light);
   border-left: 4px solid var(--ion-color-secondary);
   margin-bottom: 16px;
 }

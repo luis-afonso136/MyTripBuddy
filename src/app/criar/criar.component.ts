@@ -10,13 +10,16 @@ interface Viagem {
   state: State;
   prop1: string; // Nome da viagem
   prop2: string; // Continente
+  type: string;  // Tipo da viagem 
+  startAt?: Date | null; // Data de início da viagem
+  endAt?: Date | null;   // Data de fim da viagem
   createdBy?: string;
   updatedBy?: string;
 }
 
 enum State {
-  TODO = 'FUTURA', // Viagem futura
-  DONE = 'EFETUADA', // Viagem já efetuada
+  TODO = 'TODO', // Viagem futura
+  DONE = 'DONE', // Viagem já efetuada
 }
 
 @Component({
@@ -54,8 +57,12 @@ export class CriarComponent {
       state: [State.TODO, [Validators.required]],
       prop1: ['', [Validators.required]], // Nome da viagem
       prop2: ['', [Validators.required]], // Continente
+      type: ['', [Validators.required]],  // Tipo da viagem
+      startAt: [null], // Data de início
+      endAt: [null],   // Data de fim
     });
   }
+  
 
   async save() {
     if (this.form.valid) {
@@ -76,12 +83,15 @@ export class CriarComponent {
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
 
-    const { description, state, prop1, prop2 } = form.value;
+    const { description, type, state, prop1, prop2, startAt, endAt } = form.value;
     const newViagem = {
       description,
+      type,
       state,
       prop1,
       prop2,
+      startAt: startAt ? new Date(startAt) : null,
+      endAt: endAt ? new Date(endAt) : null,
       createdBy: this.name,
     };
 
@@ -103,12 +113,15 @@ export class CriarComponent {
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
 
-    const { description, state, prop1, prop2 } = form.value;
+    const { description, type, state, prop1, prop2, startAt, endAt } = form.value;
     const updatedViagem = {
       description,
+      type,
       state,
       prop1,
       prop2,
+      startAt: startAt ? new Date(startAt) : null,
+      endAt: endAt ? new Date(endAt) : null,
       updatedBy: this.name,
     };
 

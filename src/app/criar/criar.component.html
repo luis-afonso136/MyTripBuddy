@@ -6,6 +6,15 @@
       </ion-button>
     </ion-buttons>
     <ion-title> Viagens </ion-title>
+    <ion-button
+    color="danger"
+    fill="outline"
+    slot="end"
+    *ngIf="viagem"
+    (click)="deleteViagem(viagem)"
+  >
+    <ion-icon name="trash-outline" slot="end"></ion-icon> Deletar
+  </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -44,6 +53,24 @@
       </ion-select>
     </ion-item>
 
+    <!-- Tipo da Viagem -->
+        <ion-item>
+          <ion-label>Tipo da Viagem</ion-label>
+          <ion-select formControlName="type" placeholder="Selecione o tipo">
+            <ion-select-option value="Lazer">Lazer</ion-select-option>
+            <ion-select-option value="Negócios">Negócios</ion-select-option>
+            <ion-select-option value="Aventura">Aventura</ion-select-option>
+            <ion-select-option value="Cultural">Cultural</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-note
+        *ngIf="form.get('type')?.hasError('required') && form.get('type')?.touched"
+        color="danger"
+      >
+        Campo obrigatório!
+      </ion-note>
+
+
     <!-- Continente -->
     <ion-item>
       <ion-label>Continente</ion-label>
@@ -62,19 +89,21 @@
     >
       Campo obrigatório!
     </ion-note>
+
+    <!-- Data de Início -->
+    <ion-item>
+      <ion-label position="floating">Data de Início</ion-label>
+      <ion-datetime formControlName="startAt" presentation="date"></ion-datetime>
+    </ion-item>
+
+    <!-- Data de Fim -->
+    <ion-item>
+      <ion-label position="floating">Data de Fim</ion-label>
+      <ion-datetime formControlName="endAt" presentation="date"></ion-datetime>
+    </ion-item>
   </form>
 
   <!-- Botões de ação -->
-  <ion-button
-    color="danger"
-    expand="full"
-    shape="round"
-    *ngIf="viagem"
-    (click)="deleteViagem(viagem)"
-    class="ion-margin-top"
-  >
-    <ion-icon name="trash-outline" slot="start"></ion-icon> DELETAR
-  </ion-button>
   <ion-button
     color="primary"
     (click)="save()"

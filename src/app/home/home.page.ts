@@ -13,11 +13,20 @@ interface Viagem {
   prop1: string; // Nome da viagem
   prop2: string; // Continente
   description: string;
+  type: string; // Tipo da viagem 
   state: State;
   createdBy: string;
   createdAt: Date;
   updatedBy: string;
   updatedAt: Date;
+  startAt: Date; // Data de início da viagem
+  endAt: Date;   // Data de fim da viagem
+  locations?: Location[]; // Localizações associadas à viagem
+}
+
+interface Location {
+  prop1: string; // Nome da localização
+  description: string; // Descrição da localização
 }
 
 enum State {
@@ -56,9 +65,16 @@ export class HomePage implements OnInit {
     });
 
     try {
-      this.viagens = await firstValueFrom(
+      const viagens = await firstValueFrom(
         this.http.get<Viagem[]>(`${this.apiUrl}/travels`, { headers })
       );
+      
+      // Buscar as localizações associadas a cada viagem
+      for (let viagem of viagens) {
+        viagem.locations = await this.getLocationsForViagem(viagem.id);
+      }
+
+      this.viagens = viagens;
       loading.dismiss();
       this.presentToast(
         this.viagens.length
@@ -69,6 +85,22 @@ export class HomePage implements OnInit {
     } catch (error: any) {
       loading.dismiss();
       this.presentToast(`Erro ao carregar viagens: ${error.message}`, 'danger');
+    }
+  }
+
+  async getLocationsForViagem(viagemId: string): Promise<Location[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
+    });
+
+    try {
+      const locations = await firstValueFrom(
+        this.http.get<Location[]>(`${this.apiUrl}/travels/${viagemId}/locations`, { headers })
+      );
+      return locations;
+    } catch (error) {
+      console.error('Erro ao carregar localizações para a viagem', error);
+      return [];
     }
   }
 

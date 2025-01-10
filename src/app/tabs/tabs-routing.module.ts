@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../comments/comments.module').then(m => m.CommentsPageModule)
       },
       {
+        path: 'locations',
+        loadChildren: () => import('../locations/locations.module').then(m => m.LocationsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

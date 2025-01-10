@@ -11,13 +11,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CriarComponent } from './criar/criar.component';
 import { CriarComentarioComponent } from './criar-comentario/criar-comentario.component';
+import { AddLocationComponent } from './add-location/add-location.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CriarComponent,
-    CriarComentarioComponent
+    CriarComentarioComponent,
+    AddLocationComponent
   ],
   imports: [
     BrowserModule,

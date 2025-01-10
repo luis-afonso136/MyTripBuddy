@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Localizações</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refreshPage()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Selecione uma viagem</ion-label>
+    <ion-select [(ngModel)]="selectedViagemId" (ionChange)="selectViagem(selectedViagemId)">
+      <ion-select-option *ngFor="let viagem of viagens" [value]="viagem.id">{{ viagem.prop1 }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let location of locations">
+      <ion-label>{{ location.prop1 }} - {{ location.description }}</ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="openAddLocationModal(location, 'update')">Editar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botão flutuante para adicionar nova viagem -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="secondary" (click)="openAddLocationModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
