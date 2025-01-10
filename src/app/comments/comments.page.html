@@ -10,34 +10,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- Filtros como dois cards quadrados -->
-  <div class="filter-cards">
-    <ion-card 
-      button 
-      [class.selected]="filtroSelecionado === 'comComentarios'" 
-      (click)="filtrarViagensComComentarios()" 
-      class="filter-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="chatbubble-ellipses-outline" size="large"></ion-icon>
-        </ion-card-title>
-        <p>Com Comentários</p>
-      </ion-card-header>
-    </ion-card>
-  
-    <ion-card 
-      button 
-      [class.selected]="filtroSelecionado === 'todasViagens'" 
-      (click)="mostrarTodasViagens()" 
-      class="filter-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="airplane-outline" size="large"></ion-icon>
-        </ion-card-title>
-        <p>Todas as Viagens</p>
-      </ion-card-header>
-    </ion-card>
-  </div>
   
   <!-- Lista de viagens em cards -->
   <ion-grid>
