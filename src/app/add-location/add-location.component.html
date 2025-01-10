@@ -47,4 +47,14 @@
       </ion-button>
     </div>
   </form>
+
+  <!-- Adicionar e Listar Comentários - Somente no modo de edição -->
+  <div *ngIf="action === 'update'">
+    <!-- Adicionar Comentários -->
+    <ion-item lines="full">
+      <ion-label position="floating">Adicionar Comentário</ion-label>
+      <ion-input [(ngModel)]="newComment" name="newComment" required></ion-input>
+      <ion-button expand="block" color="secondary" (click)="addComment()">Adicionar</ion-button>
+    </ion-item>
+  </div>
 </ion-content>

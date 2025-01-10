@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, ToastController, LoadingController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core'; 
+import { ModalController, ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
@@ -8,15 +8,24 @@ interface Viagem {
   prop1: string; // Nome da viagem
 }
 
+interface Comment {
+  id: string;
+  comment: string;
+}
+
 @Component({
   selector: 'app-add-location',
   templateUrl: './add-location.component.html',
   styleUrls: ['./add-location.component.scss'],
 })
 export class AddLocationComponent implements OnInit {
-  @Input() location: any = null;  // Localização para edição
-  @Input() action: string = 'create';  // Ação: 'create' ou 'update'
+  @Input() location: any = null; // Localização para edição
+  @Input() action: string = 'create'; // Ação: 'create' ou 'update'
   viagens: Viagem[] = [];
+  comments: Comment[] = [];
+  newComment: string = ''; // Novo comentário
+  currentComment: Comment | null = null; // Comentário atual para exclusão
+  selectedComment: Comment | null = null;
 
   apiUrl: string = 'https://mobile-api-one.vercel.app/api';
   name: string = 'luis.manuel.afonso@ipvc.pt';
@@ -26,22 +35,22 @@ export class AddLocationComponent implements OnInit {
     private modalCtrl: ModalController,
     private http: HttpClient,
     private toastController: ToastController,
-    private loadingCtrl: LoadingController  // Importação do LoadingController
+    private loadingCtrl: LoadingController,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
     if (this.action === 'update') {
-      console.log(this.location); // Exibir dados de localização para verificação
+      this.getComments(); // Carregar comentários se estiver em modo de edição
     } else {
-      this.location = { prop1: '', description: '', travelId: '' };  // Inicializar com valores vazios
+      this.location = { prop1: '', description: '', travelId: '' }; // Inicializar com valores vazios
     }
     this.getViagens();
   }
-  
-  // Método para exibir o loading
-  async showLoading() {
+
+  async showLoading(message: string = 'Carregando...') {
     const loading = await this.loadingCtrl.create({
-      message: 'Carregando...',
+      message,
       spinner: 'dots',
     });
     await loading.present();
@@ -49,6 +58,7 @@ export class AddLocationComponent implements OnInit {
   }
 
   async getViagens() {
+    const loading = await this.showLoading();
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
@@ -59,6 +69,8 @@ export class AddLocationComponent implements OnInit {
       );
     } catch (error) {
       this.presentToast('Erro ao carregar viagens', 'danger');
+    } finally {
+      loading.dismiss();
     }
   }
 
@@ -67,12 +79,12 @@ export class AddLocationComponent implements OnInit {
       this.presentToast('Por favor, preencha todos os campos', 'warning');
       return;
     }
-    
-    const loading = await this.showLoading(); // Exibir loading antes de fazer a requisição
+
+    const loading = await this.showLoading();
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
-  
+
     try {
       if (this.action === 'create') {
         await firstValueFrom(
@@ -85,20 +97,18 @@ export class AddLocationComponent implements OnInit {
         );
         this.presentToast('Localização atualizada com sucesso!', 'success');
       }
-  
-      // Atualiza a lista de viagens após a operação
+
       await this.getViagens();
       this.dismissModal();
     } catch (error) {
       this.presentToast('Erro ao salvar localização', 'danger');
     } finally {
-      loading.dismiss(); // Esconder loading depois da requisição
+      loading.dismiss();
     }
   }
-  
 
   async deleteLocation() {
-    const loading = await this.showLoading(); // Exibir loading antes de fazer a requisição
+    const loading = await this.showLoading();
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
@@ -108,15 +118,12 @@ export class AddLocationComponent implements OnInit {
         this.http.delete(`${this.apiUrl}/travels/locations/${this.location.id}`, { headers })
       );
       this.presentToast('Localização deletada com sucesso!', 'success');
-
-      // Atualiza a lista de viagens após a exclusão
       await this.getViagens();
-
       this.dismissModal();
     } catch (error) {
       this.presentToast('Erro ao deletar a localização', 'danger');
     } finally {
-      loading.dismiss(); // Esconder o loading depois da requisição
+      loading.dismiss();
     }
   }
 
@@ -131,5 +138,67 @@ export class AddLocationComponent implements OnInit {
       color,
     });
     await toast.present();
+  }
+
+  async presentErrorAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Erro',
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async getComments() {
+    const headers = new HttpHeaders({
+      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
+    });
+  }
+
+  async addComment() {
+    if (!this.newComment) {
+      this.presentToast('Por favor, insira um comentário', 'warning');
+      return;
+    }
+
+    const loading = await this.showLoading();
+    const headers = new HttpHeaders({
+      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
+    });
+
+    try {
+      await firstValueFrom(
+        this.http.post(`${this.apiUrl}/travels/locations/comments`, {
+          locationId: this.location.id,
+          comment: this.newComment,
+        }, { headers })
+      );
+      this.presentToast('Comentário adicionado com sucesso!', 'success');
+      this.newComment = '';
+      this.getComments();
+    } catch (error) {
+      this.presentToast('Erro ao adicionar comentário', 'danger');
+    } finally {
+      loading.dismiss();
+    }
+  }
+
+  selectComment(comment: Comment) {
+    this.selectedComment = comment;
+  }
+
+  async deleteComment() {
+    if (this.selectedComment) {
+      const loading = await this.showLoading();
+      try {
+        await this.http.delete(`${this.apiUrl}/travels/locations/comments/${this.selectedComment.id}`);
+        this.presentToast('Comentário deletado com sucesso!', 'success');
+        this.selectedComment = null; // Limpar comentário selecionado
+      } catch (error) {
+        this.presentToast('Erro ao deletar comentário', 'danger');
+      } finally {
+        loading.dismiss();
+      }
+    }
   }
 }

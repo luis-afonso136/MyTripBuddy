@@ -3,6 +3,7 @@ import {
   ModalController,
   ToastController,
   LoadingController,
+  AlertController,
 } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
@@ -13,6 +14,7 @@ interface Location {
   prop1: string; // Nome da Localização
   description: string;
   travelId: string; // ID da Viagem
+  comments: { id: string; comment: string }[]; // Comentários associados
 }
 
 @Component({
@@ -32,7 +34,8 @@ export class LocationsPage implements OnInit {
     private modalCtrl: ModalController,
     private http: HttpClient,
     private toastController: ToastController,
-    private loadingCtrl: LoadingController // Importação do LoadingController
+    private loadingCtrl: LoadingController, // Importação do LoadingController
+    private alertController: AlertController // Importação do AlertController
   ) {}
 
   ngOnInit() {
@@ -77,7 +80,7 @@ export class LocationsPage implements OnInit {
       return;
     }
 
-    const loading = await this.showLoading(); // Exibir loading antes da requisição
+    const loading = await this.showLoading();
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
@@ -93,7 +96,7 @@ export class LocationsPage implements OnInit {
     } catch (error) {
       this.presentToast('Erro ao carregar localizações', 'danger');
     } finally {
-      loading.dismiss(); // Esconder loading depois da requisição
+      loading.dismiss();
     }
   }
 
@@ -145,6 +148,15 @@ export class LocationsPage implements OnInit {
       color,
     });
     await toast.present();
+  }
+
+  async presentAlert(message: string, header: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 
   selectViagem(viagemId: string) {

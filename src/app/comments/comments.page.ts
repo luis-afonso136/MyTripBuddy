@@ -37,7 +37,7 @@ export class CommentsPage implements OnInit {
   name: string = 'luis.manuel.afonso@ipvc.pt';
   password: string = 'T8@oXkZy';
   viagens: Viagem[] = [];
-  filtroSelecionado: string = 'todasViagens';
+  filtroSelecionado: string = 'comComentarios';
   viagensFiltradas: Viagem[] = []; // Nova variável para armazenar as viagens filtradas
 
   constructor(
@@ -127,11 +127,6 @@ export class CommentsPage implements OnInit {
     this.viagensFiltradas = this.viagens.filter(viagem => viagem.comments && viagem.comments.length > 0);
   }
 
-  // Mostrar todas as viagens
-  mostrarTodasViagens() {
-    this.filtroSelecionado = 'todasViagens';
-    this.viagensFiltradas = [...this.viagens]; // Copia todas as viagens para o array filtrado
-  }
 
   refreshViagens() {
     this.getViagens();
