@@ -79,12 +79,12 @@ export class LocationsPage implements OnInit {
       this.presentToast('Selecione uma viagem primeiro.', 'warning');
       return;
     }
-
+  
     const loading = await this.showLoading();
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
-
+  
     try {
       const locations = await firstValueFrom(
         this.http.get<Location[]>(
@@ -93,12 +93,16 @@ export class LocationsPage implements OnInit {
         )
       );
       this.locations = locations;
+      if (locations.length === 0) {
+        this.presentToast('Não tem nenhuma localização associada a esta viagem', 'warning');
+      }
     } catch (error) {
       this.presentToast('Erro ao carregar localizações', 'danger');
     } finally {
       loading.dismiss();
     }
   }
+  
 
   async openAddLocationModal(
     location: Location | null = null,

@@ -39,3 +39,10 @@
 ion-fab-button {
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+.no-locations {
+  text-align: center;        // Centraliza o texto horizontalmente
+  font-size: 16px;           // Tamanho de fonte ajustável
+  color: #888;               // Cor do texto, ajustável conforme preferir
+  margin-top: 20px;          // Espaço superior para separar do conteúdo acima
+}
