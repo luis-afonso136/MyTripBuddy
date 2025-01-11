@@ -2,26 +2,27 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="dismissModal()">
-        <ion-icon name="close-outline" slot="start"></ion-icon> Fechar
+        <ion-icon name="close-outline" slot="start"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title> Viagens </ion-title>
-    <ion-button
-    color="danger"
-    fill="outline"
-    slot="end"
-    *ngIf="viagem"
-    (click)="deleteViagem(viagem)"
-  >
-    <ion-icon name="trash-outline" slot="end"></ion-icon> Deletar
-  </ion-button>
+    <ion-title>Gerenciar Viagem</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        color="danger"
+        fill="clear"
+        *ngIf="viagem"
+        (click)="deleteViagem(viagem)"
+      >
+        <ion-icon name="trash-outline" slot="start"></ion-icon> Deletar
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form [formGroup]="form">
     <!-- Nome da Viagem -->
-    <ion-item>
+    <ion-item lines="full">
       <ion-label position="floating">Nome da Viagem</ion-label>
       <ion-input formControlName="prop1"></ion-input>
     </ion-item>
@@ -33,9 +34,11 @@
     </ion-note>
 
     <!-- Descrição -->
-    <ion-item>
+    <ion-item lines="full">
       <ion-label position="floating">Descrição</ion-label>
-      <ion-textarea formControlName="description" placeholder="Descrição"></ion-textarea>
+      <ion-textarea
+        formControlName="description"
+      ></ion-textarea>
     </ion-item>
     <ion-note
       *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched"
@@ -45,7 +48,7 @@
     </ion-note>
 
     <!-- Estado -->
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>Estado</ion-label>
       <ion-select formControlName="state" placeholder="Selecione o estado">
         <ion-select-option value="TODO">Viagem Futura</ion-select-option>
@@ -54,25 +57,24 @@
     </ion-item>
 
     <!-- Tipo da Viagem -->
-        <ion-item>
-          <ion-label>Tipo da Viagem</ion-label>
-          <ion-select formControlName="type" placeholder="Selecione o tipo">
-            <ion-select-option value="Lazer">Lazer</ion-select-option>
-            <ion-select-option value="Negócios">Negócios</ion-select-option>
-            <ion-select-option value="Aventura">Aventura</ion-select-option>
-            <ion-select-option value="Cultural">Cultural</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-note
-        *ngIf="form.get('type')?.hasError('required') && form.get('type')?.touched"
-        color="danger"
-      >
-        Campo obrigatório!
-      </ion-note>
-
+    <ion-item lines="full">
+      <ion-label>Tipo da Viagem</ion-label>
+      <ion-select formControlName="type" placeholder="Selecione o tipo">
+        <ion-select-option value="Lazer">Lazer</ion-select-option>
+        <ion-select-option value="Negócios">Negócios</ion-select-option>
+        <ion-select-option value="Aventura">Aventura</ion-select-option>
+        <ion-select-option value="Cultural">Cultural</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-note
+      *ngIf="form.get('type')?.hasError('required') && form.get('type')?.touched"
+      color="danger"
+    >
+      Campo obrigatório!
+    </ion-note>
 
     <!-- Continente -->
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>Continente</ion-label>
       <ion-select formControlName="prop2" placeholder="Selecione o continente">
         <ion-select-option value="Africa">África</ion-select-option>
@@ -91,26 +93,31 @@
     </ion-note>
 
     <!-- Data de Início -->
-    <ion-item>
+    <ion-item lines="full">
       <ion-label position="floating">Data de Início</ion-label>
       <ion-datetime formControlName="startAt" presentation="date"></ion-datetime>
     </ion-item>
 
     <!-- Data de Fim -->
-    <ion-item>
+    <ion-item lines="full">
       <ion-label position="floating">Data de Fim</ion-label>
       <ion-datetime formControlName="endAt" presentation="date"></ion-datetime>
     </ion-item>
   </form>
 
-  <!-- Botões de ação -->
-  <ion-button
-    color="primary"
-    (click)="save()"
-    expand="full"
-    shape="round"
-    class="ion-margin-top"
-  >
-    <ion-icon name="save-outline" slot="start"></ion-icon> SALVAR
-  </ion-button>
+  <!-- Separador -->
+  <div class="divider"></div>
+
+  <!-- Botões de Ação -->
+  <div class="button-group">
+    <ion-button
+      color="primary"
+      (click)="save()"
+      expand="block"
+      shape="round"
+      class="ion-margin-top"
+    >
+      <ion-icon name="save-outline" slot="start"></ion-icon> SALVAR
+    </ion-button>
+  </div>
 </ion-content>

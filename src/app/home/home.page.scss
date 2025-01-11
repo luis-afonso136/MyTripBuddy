@@ -1,0 +1,37 @@
+
+  .custom-card {
+    --background: #f9f9f9;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .custom-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .locations-title {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .locations-list {
+    margin: 0;
+    padding: 0 1rem;
+    list-style: none;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .no-locations {
+    color: #999;
+    font-style: italic;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  ion-fab-button {
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  

@@ -47,6 +47,7 @@ export class HomePage implements OnInit {
   selectedSegment: string = 'future-trips'; // Padrão de segmento
   searchTerm: string = ''; // Texto do filtro de pesquisa
 
+
   constructor(
     private modalCtrl: ModalController,
     private http: HttpClient,
@@ -63,17 +64,17 @@ export class HomePage implements OnInit {
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
-
+  
     try {
       const viagens = await firstValueFrom(
         this.http.get<Viagem[]>(`${this.apiUrl}/travels`, { headers })
       );
-      
+  
       // Buscar as localizações associadas a cada viagem
       for (let viagem of viagens) {
         viagem.locations = await this.getLocationsForViagem(viagem.id);
       }
-
+  
       this.viagens = viagens;
       loading.dismiss();
       this.presentToast(
@@ -86,7 +87,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
       this.presentToast(`Erro ao carregar viagens: ${error.message}`, 'danger');
     }
-  }
+  }  
 
   async getLocationsForViagem(viagemId: string): Promise<Location[]> {
     const headers = new HttpHeaders({
@@ -149,6 +150,7 @@ export class HomePage implements OnInit {
         viagem.prop1.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+  
 
   filterViagens() {
     // Chama apenas o getter `filteredViagens` indiretamente

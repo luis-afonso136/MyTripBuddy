@@ -10,27 +10,43 @@
 </ion-header>
 
 <ion-content>
-  
-  <!-- Lista de viagens em cards -->
+  <!-- Filtro Dropdown -->
+  <ion-item>
+    <ion-label>Filtrar</ion-label>
+    <ion-select [(ngModel)]="filtroSelecionado" (ionChange)="filtrarViagens()">
+      <ion-select-option value="todas">Todas as Viagens</ion-select-option>
+      <ion-select-option value="comComentarios">Com Comentários</ion-select-option>
+      <ion-select-option value="semComentarios">Sem Comentários</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Grade de viagens -->
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let viagem of viagensFiltradas">
-        <ion-card>
+        <ion-card class="viagem-card">
           <ion-card-header>
             <ion-card-title>{{ viagem.prop1 }}</ion-card-title>
             <ion-card-subtitle>{{ viagem.description }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <!-- Comentários dentro do card -->
+            <!-- Seção de comentários -->
             <div *ngIf="viagem.comments.length > 0" class="comments-section">
               <h4>Comentários:</h4>
-              <ion-item lines="none" *ngFor="let comentario of viagem.comments" (click)="openEditCommentModal(comentario, viagem)">
-                <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
-                <ion-label>{{ comentario.comment }}</ion-label>
-              </ion-item>
+              <ion-list>
+                <ion-item 
+                  lines="none" 
+                  *ngFor="let comentario of viagem.comments" 
+                  class="comment-item" 
+                  (click)="openEditCommentModal(comentario, viagem)"
+                >
+                  <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
+                  <ion-label>{{ comentario.comment }}</ion-label>
+                </ion-item>
+              </ion-list>
             </div>
-            <div *ngIf="viagem.comments.length === 0">
-              <p>Nenhum comentário disponível.</p>
+            <div *ngIf="viagem.comments.length === 0" class="no-comments">
+              <p><em>Nenhum comentário disponível.</em></p>
             </div>
           </ion-card-content>
         </ion-card>

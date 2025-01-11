@@ -15,10 +15,11 @@
     [(ngModel)]="searchTerm"
     (ionInput)="filterViagens()"
     placeholder="Pesquisar viagens..."
+    class="custom-searchbar"
   ></ion-searchbar>
 
   <!-- Segmento de filtro -->
-  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="filterViagens()">
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="filterViagens()" color="primary" class="custom-segment">
     <ion-segment-button value="future-trips">
       <ion-label>Viagens Futuras</ion-label>
     </ion-segment-button>
@@ -31,7 +32,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let viagem of filteredViagens">
-        <ion-card (click)="openModal(viagem)">
+        <ion-card (click)="openModal(viagem)" class="custom-card">
           <ion-card-header>
             <ion-card-title>{{ viagem.prop1 }}</ion-card-title>
             <ion-card-subtitle>{{ viagem.prop2 }}</ion-card-subtitle>
@@ -41,6 +42,19 @@
             <p><strong>Tipo De Viagem:</strong> {{ viagem.type }}</p>
             <p><strong>Início:</strong> {{ viagem.startAt | date: 'shortDate' }}</p>
             <p><strong>Fim:</strong> {{ viagem.endAt | date: 'shortDate' }}</p>
+
+            <!-- Exibir localizações associadas -->
+            <p *ngIf="viagem.locations?.length" class="locations-title">
+              <strong>Localizações:</strong>
+            </p>
+            <ul *ngIf="viagem.locations?.length" class="locations-list">
+              <li *ngFor="let location of viagem.locations">
+                {{ location.prop1 }} - {{ location.description }}
+              </li>
+            </ul>
+            <p *ngIf="!viagem.locations?.length" class="no-locations">
+              <em>Sem localizações associadas</em>
+            </p>
           </ion-card-content>
         </ion-card>
       </ion-col>

@@ -1,15 +1,19 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>{{ isEditing ? 'Editar Comentário' : 'Adicionar Comentário' }}</ion-title>
+    <ion-title class="ion-text-center">
+      {{ isEditing ? 'Editar Comentário' : 'Adicionar Comentário' }}
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="close()">Fechar</ion-button>
+      <ion-button (click)="close()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <!-- Condicional para mostrar o select apenas quando não estiver editando -->
-  <ion-item *ngIf="!isEditing">
+  <ion-item *ngIf="!isEditing" class="select-viagem">
     <ion-label position="stacked">Selecione uma Viagem</ion-label>
     <ion-select [(ngModel)]="selectedViagemId" placeholder="Escolha uma viagem">
       <ion-select-option *ngFor="let viagem of viagens" [value]="viagem.id">
@@ -19,28 +23,31 @@
   </ion-item>
 
   <!-- Comentário -->
-  <ion-item>
+  <ion-item class="comment-box">
     <ion-label position="stacked">Comentário</ion-label>
-    <ion-textarea [(ngModel)]="comment" placeholder="Digite seu comentário..."></ion-textarea>
+    <ion-textarea 
+      [(ngModel)]="comment" 
+      placeholder="Digite seu comentário..." 
+      auto-grow="true">
+    </ion-textarea>
   </ion-item>
-
-  <!-- Rodapé com botões -->
-  <ion-footer class="ion-padding">
-    <ion-button 
-      expand="block" 
-      *ngIf="isEditing" 
-      color="danger" 
-      (click)="deleteComment()" 
-      class="ion-margin-top">
-      <ion-icon name="trash-outline" slot="start"></ion-icon> Deletar Comentário
-    </ion-button>
-    
-    <ion-button 
-      expand="block" 
-      *ngIf="!isEditing" 
-      (click)="submitComment()" 
-      class="ion-margin-top">
-      <ion-icon name="save-outline" slot="start"></ion-icon> Salvar Comentário
-    </ion-button>
-  </ion-footer>
 </ion-content>
+
+<ion-footer class="footer-buttons">
+  <ion-button 
+    expand="block" 
+    *ngIf="isEditing" 
+    color="danger" 
+    (click)="deleteComment()" 
+    class="ion-margin-bottom">
+    <ion-icon name="trash-outline" slot="start"></ion-icon> Deletar Comentário
+  </ion-button>
+
+  <ion-button 
+    expand="block" 
+    *ngIf="!isEditing" 
+    color="primary" 
+    (click)="submitComment()">
+    <ion-icon name="save-outline" slot="start"></ion-icon> Salvar Comentário
+  </ion-button>
+</ion-footer>

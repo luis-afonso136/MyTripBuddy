@@ -37,7 +37,7 @@ export class CommentsPage implements OnInit {
   name: string = 'luis.manuel.afonso@ipvc.pt';
   password: string = 'T8@oXkZy';
   viagens: Viagem[] = [];
-  filtroSelecionado: string = 'comComentarios';
+  filtroSelecionado: string = 'todas'; // Filtro padrão
   viagensFiltradas: Viagem[] = []; // Nova variável para armazenar as viagens filtradas
 
   constructor(
@@ -121,11 +121,20 @@ export class CommentsPage implements OnInit {
     }
   }
 
-  // Filtrar viagens com comentários
-  filtrarViagensComComentarios() {
-    this.filtroSelecionado = 'comComentarios';
-    this.viagensFiltradas = this.viagens.filter(viagem => viagem.comments && viagem.comments.length > 0);
+  filtrarViagens() {
+    switch (this.filtroSelecionado) {
+      case 'comComentarios':
+        this.viagensFiltradas = this.viagens.filter(viagem => viagem.comments && viagem.comments.length > 0);
+        break;
+      case 'semComentarios':
+        this.viagensFiltradas = this.viagens.filter(viagem => !viagem.comments || viagem.comments.length === 0);
+        break;
+      default: 'todas'
+        this.viagensFiltradas = [...this.viagens];
+        break;
+    }
   }
+  
 
 
   refreshViagens() {

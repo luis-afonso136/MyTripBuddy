@@ -182,23 +182,5 @@ export class AddLocationComponent implements OnInit {
       loading.dismiss();
     }
   }
-
-  selectComment(comment: Comment) {
-    this.selectedComment = comment;
-  }
-
-  async deleteComment() {
-    if (this.selectedComment) {
-      const loading = await this.showLoading();
-      try {
-        await this.http.delete(`${this.apiUrl}/travels/locations/comments/${this.selectedComment.id}`);
-        this.presentToast('Comentário deletado com sucesso!', 'success');
-        this.selectedComment = null; // Limpar comentário selecionado
-      } catch (error) {
-        this.presentToast('Erro ao deletar comentário', 'danger');
-      } finally {
-        loading.dismiss();
-      }
-    }
-  }
+  
 }

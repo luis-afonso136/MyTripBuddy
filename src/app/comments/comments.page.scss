@@ -1,35 +1,43 @@
+/* Estilo dos cartões */
+.viagem-card {
+  --background: #ffffff;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
 
+.viagem-card:hover {
+  transform: scale(1.03);
+  --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
 
-.viagem-item {
-  margin: 12px 0;
+/* Seção de comentários */
+.comments-section h4 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-weight: bold;
+}
+
+.comment-item {
+  --background: #f9f9f9;
   border-radius: 8px;
-  background: var(--ion-color-light);
+  margin: 0.5rem 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.comments-section {
-  padding: 16px;
-  border-left: 4px solid var(--ion-color-secondary);
-  margin-bottom: 16px;
+.comment-item ion-icon {
+  color: #007bff;
 }
 
-.comment-box {
-  display: flex;
-  align-items: center;
-  margin: 8px 0;
-  font-size: 14px;
+/* Estilo para texto de "nenhum comentário" */
+.no-comments p {
+  text-align: center;
+  font-style: italic;
+  color: #888;
 }
 
-.comment-box ion-icon {
-  margin-right: 8px;
-  color: var(--ion-color-secondary);
-}
-
-.comment-box span {
-  color: var(--ion-color-dark);
-}
-
+/* Botão flutuante */
 ion-fab-button {
-  --background: var(--ion-color-secondary);
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-

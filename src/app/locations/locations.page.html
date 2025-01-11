@@ -3,36 +3,41 @@
     <ion-title>Localizações</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="refreshPage()">
-        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
+  <!-- Dropdown para selecionar uma viagem -->
+  <ion-item class="custom-select">
     <ion-label>Selecione uma viagem</ion-label>
     <ion-select [(ngModel)]="selectedViagemId" (ionChange)="selectViagem(selectedViagemId)">
       <ion-select-option *ngFor="let viagem of viagens" [value]="viagem.id">{{ viagem.prop1 }}</ion-select-option>
     </ion-select>
   </ion-item>
 
-  <ion-list>
-    <ion-card *ngFor="let location of locations" (click)="openAddLocationModal(location, 'update')">
+  <!-- Lista de localizações -->
+  <ion-list class="locations-list">
+    <ion-card *ngFor="let location of locations" (click)="openAddLocationModal(location, 'update')" class="custom-card">
       <ion-card-header>
         <ion-card-title>{{ location.prop1 }}</ion-card-title>
         <ion-card-subtitle>{{ location.description }}</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let comment of location.comments" class="comments-section">
+        <!-- Comentários da localização -->
+        <ion-list *ngIf="location.comments?.length" class="comments-list">
+          <ion-item *ngFor="let comment of location.comments" class="comment-item">
             <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
             <ion-label>{{ comment.comment }}</ion-label>
           </ion-item>
         </ion-list>
+        <p *ngIf="!location.comments?.length" class="no-comments">
+          <em>Sem comentários disponíveis</em>
+        </p>
       </ion-card-content>
-      
     </ion-card>
   </ion-list>
 
@@ -43,4 +48,3 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
-
