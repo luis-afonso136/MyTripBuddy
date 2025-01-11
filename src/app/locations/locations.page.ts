@@ -43,9 +43,19 @@ export class LocationsPage implements OnInit {
   }
 
   // Função para refrescar a página
-  async refreshPage() {
-    this.getLocations(); // Recarregar as localizações
+async refreshPage() {
+  const loading = await this.showLoading(); // Exibir o carregamento
+
+  // Primeiro, recarregar as viagens
+  await this.getViagens();
+
+  // Se uma viagem estiver selecionada, recarregar as localizações
+  if (this.selectedViagemId) {
+    await this.getLocations();
   }
+
+  loading.dismiss(); // Esconder o carregamento após a conclusão
+}
 
   // Mostrar o carregamento
   async showLoading() {
@@ -104,28 +114,28 @@ export class LocationsPage implements OnInit {
   }
   
 
-  async openAddLocationModal(
-    location: Location | null = null,
-    action: string = 'create'
-  ) {
+  async openAddLocationModal(location: Location | null = null, action: string = 'create') {
     const modal = await this.modalCtrl.create({
       component: AddLocationComponent,
       componentProps: { location, action },
       backdropDismiss: false,
     });
     modal.present();
+  
+    // Aguarda o fechamento do modal e verifica se o retorno indica sucesso
     const { data } = await modal.onWillDismiss();
     if (data?.message === 'success') {
-      this.getLocations(); // Recarregar as localizações após adicionar ou atualizar
+      this.getLocations(); // Recarrega as localizações após adicionar ou atualizar
     }
   }
+   
 
   async deleteLocation(locationId: string) {
     const loading = await this.showLoading(); // Exibir loading antes da requisição
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
-
+  
     try {
       await firstValueFrom(
         this.http.delete(`${this.apiUrl}/travels/locations/${locationId}`, {
@@ -133,17 +143,13 @@ export class LocationsPage implements OnInit {
         })
       );
       this.presentToast('Localização deletada com sucesso!', 'success');
-
-      // Atualizar a lista de localizações após a exclusão (remove do array)
-      this.locations = this.locations.filter(
-        (location) => location.id !== locationId
-      );
+      this.refreshPage(); // Recarregar a página após a exclusão
     } catch (error) {
       this.presentToast('Erro ao deletar a localização', 'danger');
     } finally {
       loading.dismiss(); // Esconder loading depois da requisição
     }
-  }
+  }  
 
   async presentToast(message: string, color: 'success' | 'danger' | 'warning') {
     const toast = await this.toastController.create({

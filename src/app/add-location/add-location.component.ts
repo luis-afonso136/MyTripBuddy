@@ -79,12 +79,12 @@ export class AddLocationComponent implements OnInit {
       this.presentToast('Por favor, preencha todos os campos', 'warning');
       return;
     }
-
+  
     const loading = await this.showLoading();
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
     });
-
+  
     try {
       if (this.action === 'create') {
         await firstValueFrom(
@@ -97,15 +97,15 @@ export class AddLocationComponent implements OnInit {
         );
         this.presentToast('Localização atualizada com sucesso!', 'success');
       }
-
-      await this.getViagens();
+  
+      // Chama getLocations para garantir que a lista seja atualizada após a modificação
       this.dismissModal();
     } catch (error) {
       this.presentToast('Erro ao salvar localização', 'danger');
     } finally {
       loading.dismiss();
     }
-  }
+  }  
 
   async deleteLocation() {
     const loading = await this.showLoading();
