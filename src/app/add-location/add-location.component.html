@@ -8,6 +8,17 @@
         <ion-icon name="close" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button
+          expand="block"
+          color="danger"
+          *ngIf="action === 'update'"
+          (click)="deleteLocation()"
+          shape="round"
+          class="ion-margin-top">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>Eliminar
+      </ion-button>
+     </ion-buttons> 
   </ion-toolbar>
 </ion-header>
 
@@ -50,17 +61,6 @@
         shape="round"
         color="primary">
         {{ action === 'update' ? 'Atualizar Localização' : 'Associar Localização' }}
-      </ion-button>
-
-      <!-- Botão de exclusão -->
-      <ion-button
-        expand="block"
-        color="danger"
-        *ngIf="action === 'update'"
-        (click)="deleteLocation()"
-        shape="round"
-        class="ion-margin-top">
-        Eliminar Localização
       </ion-button>
     </div>
   </form>
