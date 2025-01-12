@@ -46,7 +46,7 @@ export class CriarComentarioComponent implements OnInit {
     const loading = await this.showLoading();
     try {
       if (this.isEditing) {
-        // Atualiza o comentário
+   
         await firstValueFrom(
           this.http.put(
             `${this.apiUrl}/travels/comments/${this.comentario.id}`,
@@ -57,7 +57,7 @@ export class CriarComentarioComponent implements OnInit {
         this.presentToast('Comentário atualizado com sucesso!', 'success');
         this.modalCtrl.dismiss({ message: 'comentarioAlterado' });
       } else {
-        // Cria um novo comentário
+      
         await firstValueFrom(
           this.http.post(
             `${this.apiUrl}/travels/comments`,

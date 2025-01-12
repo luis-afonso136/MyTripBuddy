@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
         this.http.get<Viagem[]>(`${this.apiUrl}/travels`, { headers })
       );
   
-      // Buscar as localizações associadas a cada viagem
+      
       for (let viagem of viagens) {
         viagem.locations = await this.getLocationsForViagem(viagem.id);
       }
