@@ -8,6 +8,17 @@
         <ion-icon name="close" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button
+          expand="block"
+          color="danger"
+          *ngIf="action === 'update'"
+          (click)="deleteLocation()"
+          shape="round"
+          class="ion-margin-top">
+          <ion-icon name="trash-outline" slot="start"></ion-icon>Eliminar
+      </ion-button>
+     </ion-buttons> 
   </ion-toolbar>
 </ion-header>
 
@@ -40,6 +51,20 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+
+    <!-- Botões -->
+    <div class="ion-margin-top">
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="!location.travelId"
+        shape="round"
+        color="primary">
+        {{ action === 'update' ? 'Atualizar Localização' : 'Associar Localização' }}
+      </ion-button>
+
+      
+    </div>
   </form>
 
   <!-- Adicionar e Listar Comentários - Somente no modo de edição -->
