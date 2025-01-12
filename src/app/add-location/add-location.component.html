@@ -50,21 +50,7 @@
           {{ viagem.prop1 }}
         </ion-select-option>
       </ion-select>
-    </ion-item>
-
-    <!-- Botões -->
-    <div class="ion-margin-top">
-      <ion-button
-        expand="block"
-        type="submit"
-        [disabled]="!location.travelId"
-        shape="round"
-        color="primary">
-        {{ action === 'update' ? 'Atualizar Localização' : 'Associar Localização' }}
-      </ion-button>
-
-      
-    </div>
+    </ion-item>   
   </form>
 
   <!-- Adicionar e Listar Comentários - Somente no modo de edição -->
@@ -92,23 +78,13 @@
   <!-- Botões -->
   <div class="ion-margin-top">
     <ion-button
+    (click)="submitForm()"
       expand="block"
       type="submit"
       [disabled]="!location.travelId"
       shape="round"
       color="primary">
       {{ action === 'update' ? 'Atualizar Localização' : 'Associar Localização' }}
-    </ion-button>
-
-    <!-- Botão de exclusão -->
-    <ion-button
-      expand="block"
-      color="danger"
-      *ngIf="action === 'update'"
-      (click)="deleteLocation()"
-      shape="round"
-      class="ion-margin-top">
-      Eliminar Localização
     </ion-button>
   </div>
 </ion-footer>
