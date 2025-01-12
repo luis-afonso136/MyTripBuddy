@@ -41,7 +41,7 @@ export class AddLocationComponent implements OnInit {
 
   ngOnInit() {
     if (this.action === 'update') {
-      this.getComments(); // Carregar comentários se estiver em modo de edição
+      this.getComments(); 
     } else {
       this.location = { prop1: '', description: '', travelId: '' }; // Inicializar com valores vazios
     }

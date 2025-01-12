@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <!-- Dropdown para selecionar uma viagem -->
+ 
   <ion-item class="custom-select">
     <ion-label>Selecione uma viagem</ion-label>
     <ion-select [(ngModel)]="selectedViagemId" (ionChange)="selectViagem(selectedViagemId)">
@@ -19,12 +19,11 @@
     </ion-select>
   </ion-item>
 
-  <!-- Mensagem quando não houver localizações associadas -->
+  
   <p *ngIf="locations.length === 0 && selectedViagemId" class="no-locations">
     Não tem nenhuma localização associada
   </p>
 
-  <!-- Lista de localizações -->
   <ion-list class="locations-list">
     <ion-card *ngFor="let location of locations" (click)="openAddLocationModal(location, 'update')" class="custom-card">
       <ion-card-header>
@@ -33,7 +32,7 @@
       </ion-card-header>
 
       <ion-card-content>
-        <!-- Comentários da localização -->
+
         <ion-list *ngIf="location.comments?.length" class="comments-list">
           <ion-item *ngFor="let comment of location.comments" class="comment-item">
             <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
@@ -47,7 +46,6 @@
     </ion-card>
   </ion-list>
 
-  <!-- Botão flutuante para adicionar nova localização -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="secondary" (click)="openAddLocationModal()">
       <ion-icon name="add"></ion-icon>

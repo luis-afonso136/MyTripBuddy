@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Condicional para mostrar o select apenas quando não estiver editando -->
+  
   <ion-item *ngIf="!isEditing" class="select-viagem">
     <ion-label position="stacked">Selecione uma Viagem</ion-label>
     <ion-select [(ngModel)]="selectedViagemId" placeholder="Escolha uma viagem">
@@ -23,7 +23,7 @@
     </ion-select>
   </ion-item>
 
-  <!-- Comentário -->
+  
   <ion-item class="comment-box">
     <ion-label position="stacked">Comentário</ion-label>
     <ion-textarea 

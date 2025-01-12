@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <!-- Filtro Dropdown -->
+
   <ion-item>
     <ion-label>Filtrar</ion-label>
     <ion-select [(ngModel)]="filtroSelecionado" (ionChange)="filtrarViagens()">
@@ -20,7 +20,7 @@
     </ion-select>
   </ion-item>
 
-  <!-- Grade de viagens -->
+
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let viagem of viagensFiltradas">
@@ -30,7 +30,7 @@
             <ion-card-subtitle>{{ viagem.description }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <!-- Seção de comentários -->
+         
             <div *ngIf="viagem.comments.length > 0" class="comments-section">
               <h4>Comentários:</h4>
               <ion-list>
@@ -54,7 +54,7 @@
     </ion-row>
   </ion-grid>
 
-  <!-- Botão flutuante para adicionar novo comentário -->
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="secondary" (click)="openCreateCommentModal()">
       <ion-icon name="add"></ion-icon>

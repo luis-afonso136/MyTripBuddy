@@ -21,7 +21,7 @@
 
 <ion-content class="ion-padding">
   <form [formGroup]="form">
-    <!-- Nome da Viagem -->
+    
     <ion-item lines="full">
       <ion-label position="floating">Nome da Viagem</ion-label>
       <ion-input formControlName="prop1"></ion-input>
@@ -33,7 +33,7 @@
       Campo obrigatório!
     </ion-note>
 
-    <!-- Descrição -->
+    
     <ion-item lines="full">
       <ion-label position="floating">Descrição</ion-label>
       <ion-textarea
@@ -47,7 +47,7 @@
       Campo obrigatório!
     </ion-note>
 
-    <!-- Estado -->
+
     <ion-item lines="full">
       <ion-label>Estado</ion-label>
       <ion-select formControlName="state" placeholder="Selecione o estado">
@@ -56,7 +56,7 @@
       </ion-select>
     </ion-item>
 
-    <!-- Tipo da Viagem -->
+   
     <ion-item lines="full">
       <ion-label>Tipo da Viagem</ion-label>
       <ion-select formControlName="type" placeholder="Selecione o tipo">
@@ -73,7 +73,7 @@
       Campo obrigatório!
     </ion-note>
 
-    <!-- Continente -->
+   
     <ion-item lines="full">
       <ion-label>Continente</ion-label>
       <ion-select formControlName="prop2" placeholder="Selecione o continente">
@@ -92,23 +92,23 @@
       Campo obrigatório!
     </ion-note>
 
-    <!-- Data de Início -->
+
     <ion-item lines="full">
       <ion-label position="floating">Data de Início</ion-label>
       <ion-datetime formControlName="startAt" presentation="date"></ion-datetime>
     </ion-item>
 
-    <!-- Data de Fim -->
+   
     <ion-item lines="full">
       <ion-label position="floating">Data de Fim</ion-label>
       <ion-datetime formControlName="endAt" presentation="date"></ion-datetime>
     </ion-item>
   </form>
 
-  <!-- Separador -->
+ 
   <div class="divider"></div>
 
-  <!-- Botões de Ação -->
+
   <div class="button-group">
     <ion-button
       color="primary"

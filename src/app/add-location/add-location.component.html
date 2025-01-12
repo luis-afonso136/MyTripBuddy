@@ -24,13 +24,13 @@
 
 <ion-content class="ion-padding">
   <form (ngSubmit)="submitForm()">
-    <!-- Nome da Localização -->
+  
     <ion-item lines="inset" class="form-item">
       <ion-label position="floating">Nome da Localização</ion-label>
       <ion-input [(ngModel)]="location.prop1" name="prop1" required></ion-input>
     </ion-item>
 
-    <!-- Descrição -->
+
     <ion-item lines="inset" class="form-item">
       <ion-label position="floating">Descrição</ion-label>
       <ion-textarea
@@ -42,7 +42,7 @@
       </ion-textarea>
     </ion-item>
 
-    <!-- Seleção de Viagem -->
+  
     <ion-item lines="inset" class="form-item">
       <ion-label>Selecione a Viagem</ion-label>
       <ion-select [(ngModel)]="location.travelId" name="travelId" placeholder="Selecione" required>
@@ -53,11 +53,11 @@
     </ion-item>   
   </form>
 
-  <!-- Adicionar e Listar Comentários - Somente no modo de edição -->
+  
   <div *ngIf="action === 'update'" class="ion-margin-top">
     <ion-card>
       <ion-card-content>
-        <!-- Adicionar Comentário -->
+       
         <ion-item lines="inset">
           <ion-label position="floating">Adicionar Comentário</ion-label>
           <ion-input [(ngModel)]="newComment" name="newComment"></ion-input>
@@ -75,7 +75,7 @@
 </ion-content>
 
 <ion-footer class="footer-buttons">
-  <!-- Botões -->
+ 
   <div class="ion-margin-top">
     <ion-button
     (click)="submitForm()"
